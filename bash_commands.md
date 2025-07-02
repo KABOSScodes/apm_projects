@@ -145,5 +145,3 @@ Set or change remote url (see above).
   - Open specific folder: explorer <folder_name>
 
 ---
-
-Nu da visual studio microsoft whatever er downloadet, prøv da at installere requirements igen (automatic job application).
