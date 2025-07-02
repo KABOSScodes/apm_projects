@@ -1,6 +1,6 @@
+# Load dataset
 Tutorial on how to access data used in Applied Predictive Modeling. This is accessed in R and then downloaded as a Parquet file for import in python.
 
-# Load dataset
 Example is based on the specific dataset segmentationOriginal. In all cases, this should be replaced with the dataset of interest.
 
 ## In R
@@ -28,9 +28,3 @@ Or
 Load dataset:
 > import pandas as pd
 > df = pd.read_parquet("segmentation.parquet")
-
-
-
-
-
-
