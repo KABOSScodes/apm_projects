@@ -1,0 +1,7 @@
+# Todo
+- Start GitHub
+- Lav connection fra mappe APMProjects til GitHub
+- Start notary med hvordan jeg fik adgang til data i R, hvordan jeg gemte det lavede parquet-fil osv.
+- Køb bog
+- Fortsæt med projekt 1
+- Fortsæt med læsning
