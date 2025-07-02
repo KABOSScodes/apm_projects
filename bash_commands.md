@@ -45,7 +45,7 @@ Commands to create, move, and delete files or directories.
 
 ### Conda Virtual Environment setup
 Pip can also be used as above, but consider pip the secondary option for installing packages.
-- Set up Conda environment: conda create --name <env_name> python=<version>
+- Set up Conda environment: `conda create --name <env_name> python=<version>`
 - Initialize Conda in Git Bash: conda init bash (only required if not done before)
 - Activate Conda environment: conda activate <env_name>
 - Install packages from requirements file: pip install -r requirements.txt
