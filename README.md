@@ -11,7 +11,6 @@ This is **not** a strict line-by-line translation of the R code. Many projects i
 - [Repository Structure](#repository-structure)
 - [Brief Project Descriptions](#brief-project-descriptions)
 - [Data Access](#data-access)
-- [Reproducibility Notes](#reproducibility-notes)
 
 ## Purpose
 
@@ -25,7 +24,11 @@ The repository uses a Conda environment defined in `APMProjects_env.yml`. To rec
 conda env create -f APMProjects_env.yml
 conda activate APMProjects
 ```
+
+Additionally, it should be noted that to avoid alignment issues with the path, the APMProjects repository should be cloned to the desktop.  
+
 ## Repository Structure
+*Will be updated*
 
 | Folder/File              | Description |
 |--------------------------|-------------|
@@ -46,10 +49,7 @@ conda activate APMProjects
 
 The file `AccessData.md` provides an example of how to extract datasets directly from R, for those who wish to start from scratch rather than reuse the pre-converted Parquet files provided in each project folder.
 
-## Reproducibility Notes
-Paths: Some scripts may contain hardcoded paths. To avoid issues, it’s recommended to clone this repository directly to your Desktop, or adjust paths as needed.
-
-Data: If you prefer not to pull the data from R yourself, each project folder contains the necessary Parquet-formatted datasets.
+If you prefer not to pull the data from R yourself, each project folder contains the necessary Parquet-formatted datasets.
 
 ## Test Area
 
