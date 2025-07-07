@@ -48,3 +48,19 @@ The file `AccessData.md` provides an example of how to extract datasets directly
 Paths: Some scripts may contain hardcoded paths. To avoid issues, it’s recommended to clone this repository directly to your Desktop, or adjust paths as needed.
 
 Data: If you prefer not to pull the data from R yourself, each project folder contains the necessary Parquet-formatted datasets.
+
+## Test Area
+
+1) test
+2) another test
+    * a
+    * b
+    * c
+3) That was it
+
+* Hmm
+* Hi
+
+1. Numbering again
+2. Still...
+
