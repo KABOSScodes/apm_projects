@@ -94,6 +94,8 @@ The above also applies for email. Simply substitute `<name>` for `<email>`.
   - All files: `git add .`
 - Commit changes: `git commit -m "<commit_message>"`
 - View commit history: `git log`
+- Remove all currently tracked files that should be ignored: `git rm -r --cached .`
+  - Stage, commit, and push again to make Github reflect the .gitignore file
 
 ## Branching and Merging
 - Create new branch: `git checkout -b <branch_name>`
