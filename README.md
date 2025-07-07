@@ -25,18 +25,20 @@ The repository uses a Conda environment defined in `APMProjects_env.yml`. To rec
 conda env create -f APMProjects_env.yml
 conda activate APMProjects
 ```
-## Repository structure
+## Repository Structure
 
-APMProjects/
-├── Pre-Processing/          # Scripts and notebooks for data cleaning and transformation
-├── Project1/                # First applied modeling project (e.g., segmentation tasks)
-├── RChapterScripts/         # R code from the book, included for reference
-├── APMProjects_env.yml      # Conda environment definition
-├── AccessData.md            # Instructions for obtaining datasets from R
-├── plots.ipynb              # Standalone visualizations and plot experiments
-├── bash_commands.md         # Notes on useful shell commands
-├── todo.txt                 # Personal task list
-├── README.md                # This file
+| Folder/File              | Description |
+|--------------------------|-------------|
+| `Pre-Processing/`        | Scripts and notebooks for data cleaning and transformation |
+| `Project1/`              | First applied modeling project (e.g., segmentation tasks) |
+| `RChapterScripts/`       | Original R code from the book, included for reference |
+| `APMProjects_env.yml`    | Conda environment definition file |
+| `AccessData.md`          | How to access datasets from R |
+| `plots.ipynb`            | Experiments and standalone visualizations |
+| `bash_commands.md`       | Notes on useful shell commands |
+| `todo.txt`               | Personal task list |
+| `README.md`              | This file |
+
 
 ## Brief Project descriptions
 
