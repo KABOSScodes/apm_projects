@@ -1,7 +1,7 @@
 # Load dataset
 Tutorial on how to access data used in Applied Predictive Modeling. This is accessed in R and then downloaded as a Parquet file for import in python.
 
-Example is based on the specific dataset segmentationOriginal. In all cases, this should be replaced with the dataset of interest.
+Example is based on the specific dataset segmentationOriginal from the AppliedPredictiveModeling package. In all cases, this should be replaced with the dataset and package of interest.
 
 ## In R
 Install and load dataset:
@@ -16,7 +16,7 @@ Use the following to inspect the loaded dataset:
 > summary(segmentationOriginal)
 
 If not installed, install arrow to export data as parquet file:
-> install.packages("arrow")  # Only run this once
+> install.packages("arrow")
 
 Load and save the dataset:
 > library(arrow)
