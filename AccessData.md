@@ -6,24 +6,24 @@ Example is based on the specific dataset segmentationOriginal from the AppliedPr
 ## In R
 Install and load dataset:
 - `install.packages('AppliedPredictiveModeling')` Follow instructions if any for installation.
-`library(AppliedPredictiveModeling)`
-`data(segmentationOriginal)`
+- `library(AppliedPredictiveModeling)`
+- `data(segmentationOriginal)`
 
 Use the following to inspect the loaded dataset:
-`str(segmentationOriginal)`
-`head(segmentationOriginal)`
-`summary(segmentationOriginal)`
+- `str(segmentationOriginal)`
+- `head(segmentationOriginal)`
+- `summary(segmentationOriginal)`
 
 If not installed, install arrow to export data as parquet file:
-`install.packages("arrow")`
+- `install.packages("arrow")`
 
 Load and save the dataset:
-`library(arrow)` Package to save data as parquet-file.
-`write_parquet(segmentationOriginal, "segmentation.parquet")`
+- `library(arrow)` Package to save data as parquet-file.
+- `write_parquet(segmentationOriginal, "segmentation.parquet")`
 Or
-`write_parquet(segmentationOriginal, "~/Desktop/APMProjects/segmentation.parquet", compression = "snappy")`
+- `write_parquet(segmentationOriginal, "~/Desktop/APMProjects/segmentation.parquet", compression = "snappy")`
 
 ## In python
 Load dataset:
-`import pandas as pd`
-`df = pd.read_parquet("segmentation.parquet")`
+- `import pandas as pd`
+- `df = pd.read_parquet("segmentation.parquet")`
