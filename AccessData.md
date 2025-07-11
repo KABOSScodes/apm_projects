@@ -17,8 +17,8 @@ Use the following to inspect the loaded dataset:
 If not installed, install arrow to export data as parquet file:
 - `install.packages("arrow")`
 
-Load and save the dataset:
-- `library(arrow)` Package to save data as parquet-file.
+Load arrow and save the dataset:
+- `library(arrow)`
 - `write_parquet(segmentationOriginal, "segmentation.parquet")`
 Or
 - `write_parquet(segmentationOriginal, "~/Desktop/APMProjects/segmentation.parquet", compression = "snappy")`
