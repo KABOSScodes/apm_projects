@@ -1,0 +1,10 @@
+.DS_Store
+bash_commands.md
+plots.ipynb
+Applied_predictive_modeling_max_kuhn_kje.pdf
+RChapterScripts
+todo.txt
+AppliedPredictiveModeling.pdf
+.ipynb_checkpoints/
+__pycache__/
+*.pyc
