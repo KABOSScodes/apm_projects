@@ -1,68 +1,48 @@
-# README – Applied Predictive Modeling Projects
+# Applied Predictive Modeling Projects
 
-This repository contains solutions and explorations based on *Applied Predictive Modeling* by Max Kuhn and Kjell Johnson. The original book uses R, but all work here is implemented in Python.
+## Project Description
 
-This is **not** a strict line-by-line translation of the R code. Many projects include extended analysis, helper functions, and visualizations that go beyond the original book—either because they were good learning opportunities or personally interesting to investigate.
+This repository contains solutions and explorations based on *Applied Predictive Modeling* by Max Kuhn and Kjell Johnson. While the original book uses R, all work here is implemented in Python.
+
+The project is intended for educational purposes—for myself and for readers who want to follow the book but prefer working in Python. For that reason, the implementation is structured as a series of Jupyter Notebooks, making it easy to explore, modify, and visualize code step by step.
+
+This is **not** a strict line-by-line translation of the R code. Many chapters include extended analysis, custom helper functions, or additional visualizations that go beyond the original material—either because they offered good learning opportunities or were personally interesting to explore.
+
 
 ## Table of Contents
 
 - [Purpose](#purpose)
 - [Environment Setup](#environment-setup)
 - [Repository Structure](#repository-structure)
-- [Brief Project Descriptions](#brief-project-descriptions)
 - [Data Access](#data-access)
 
 ## Purpose
 
-The goal of this project is to deepen my understanding of predictive modeling techniques by reproducing and expanding on the exercises from *Applied Predictive Modeling* using Python.
+The goal of this project is to deepen my understanding of predictive modeling techniques by reproducing and expanding on the exercises from *Applied Predictive Modeling* using Python. 
 
 ## Environment Setup
 
-The repository uses a Conda environment defined in `APMProjects_env.yml`. To recreate it:
+The repository uses a Conda environment defined in `apm_projects_env.yml`. To recreate it:
 
 ```bash
-conda env create -f APMProjects_env.yml
-conda activate APMProjects
+conda env create -f apm_projects_env.yml
+conda activate apm_projects
 ```
 
-Additionally, it should be noted that to avoid alignment issues with the path, the APMProjects repository should be cloned to the desktop.  
+*Note:* The environment file is provided for convenience but may occasionally lag behind the current environment, as updates are made continuously throughout the project. If you encounter missing packages, installing them manually post envrionment activation with conda or pip should resolve the issue. 
+
+Additionally, it should be noted that to avoid alignment issues with the path, the apm_projects repository should be cloned to the desktop.  
 
 ## Repository Structure
-*Will be updated*
 
 | Folder/File              | Description |
 |--------------------------|-------------|
-| `Pre-Processing/`        | Scripts and notebooks for data cleaning and transformation |
-| `Project1/`              | First applied modeling project (e.g., segmentation tasks) |
-| `RChapterScripts/`       | Original R code from the book, included for reference |
-| `APMProjects_env.yml`    | Conda environment definition file |
-| `AccessData.md`          | How to access datasets from R |
-| `plots.ipynb`            | Experiments and standalone visualizations |
-| `bash_commands.md`       | Notes on useful shell commands |
-| `todo.txt`               | Personal task list |
+| `chapters/`              | Utility functions and notebooks for each chapter currently completed |
+| `data/`                  | All utilized data |
+| `apm_projects_env.yml`   | Conda environment definition file |
+| `access_data.md`         | How to access datasets from R |
 | `README.md`              | This file |
-
-
-## Brief Project descriptions
 
 ## Data Access
 
-The file `AccessData.md` provides an example of how to extract datasets directly from R, for those who wish to start from scratch rather than reuse the pre-converted Parquet files provided in each project folder.
-
-If you prefer not to pull the data from R yourself, each project folder contains the necessary Parquet-formatted datasets.
-
-## Test Area
-
-1) test
-2) another test
-    * a
-    * b
-    * c
-3) That was it
-
-* Hmm
-* Hi
-
-1. Numbering again
-2. Still...
-
+The file `access_data.md` provides an example of how to extract datasets directly from R, for those who wish to start from scratch rather than reuse the pre-converted Parquet files provided in the data folder.
