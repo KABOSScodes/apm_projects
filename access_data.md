@@ -21,9 +21,9 @@ Load arrow and save the dataset:
 - `library(arrow)`
 - `write_parquet(segmentationOriginal, "segmentation.parquet")`
 Or
-- `write_parquet(segmentationOriginal, "~/Desktop/APMProjects/segmentation.parquet", compression = "snappy")`
+- `write_parquet(segmentationOriginal, "~/Desktop/apm_projects/data/segmentation.parquet", compression = "snappy")`
 
 ## In python
 Load dataset:
 - `import pandas as pd`
-- `df = pd.read_parquet("segmentation.parquet")`
+- `df = pd.read_parquet("../../data/segmentation.parquet")`
