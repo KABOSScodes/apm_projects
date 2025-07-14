@@ -8,6 +8,7 @@ The project is intended for educational purposes—for myself and for readers wh
 
 This is **not** a strict line-by-line translation of the R code. Many chapters include extended analysis, custom helper functions, or additional visualizations that go beyond the original material—either because they offered good learning opportunities or were personally interesting to explore.
 
+The repository is a work in progress and will continue to be updated as I move through the source material.
 
 ## Table of Contents
 
@@ -20,18 +21,24 @@ This is **not** a strict line-by-line translation of the R code. Many chapters i
 
 The goal of this project is to deepen my understanding of predictive modeling techniques by reproducing and expanding on the exercises from *Applied Predictive Modeling* using Python. 
 
-## Environment Setup
+## Project Status
 
-The repository uses a Conda environment defined in `apm_projects_env.yml`. To recreate it:
+This repository is a work in progress. Notebooks and content will be added and refined continuously as I work through the chapters in *Applied Predictive Modeling*.
+
+## Getting Started
+
+To get started, clone the repository and set up the Conda environment:
 
 ```bash
+git clone https://github.com/KABOSScodes/apm_projects.git
+cd apm_projects
 conda env create -f apm_projects_env.yml
 conda activate apm_projects
 ```
 
 *Note:* The environment file is provided for convenience but may occasionally lag behind the current environment, as updates are made continuously throughout the project. If you encounter missing packages, installing them manually post envrionment activation with conda or pip should resolve the issue. 
 
-Additionally, it should be noted that to avoid alignment issues with the path, the apm_projects repository should be cloned to the desktop.  
+Additionally, it should be noted that the repository is currently structured with relative paths. For smooth execution of notebooks, ensure the working directory remains the project root when running Jupyter.
 
 ## Repository Structure
 
