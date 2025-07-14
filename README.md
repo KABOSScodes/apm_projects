@@ -13,7 +13,8 @@ The repository is a work in progress and will continue to be updated as I move t
 ## Table of Contents
 
 - [Purpose](#purpose)
-- [Environment Setup](#environment-setup)
+- [Project Status](#project-status)
+- [Getting Started](#getting-started)
 - [Repository Structure](#repository-structure)
 - [Data Access](#data-access)
 
