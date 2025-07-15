@@ -1,6 +1,9 @@
 import pandas as pd
 from scipy.stats import skew
 import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+from scipy.cluster.hierarchy import linkage, leaves_list
 
 
 def check_transform_suitability(df, save_csv=False, skew_bias=True, csv_path='transform_suitability.csv'):
@@ -71,7 +74,6 @@ def check_transform_suitability(df, save_csv=False, skew_bias=True, csv_path='tr
 
 def selective_transform(df, summary_df):
     """
-    CONSIDER ADDING CENTERING AND FOR CONSITENCY'S SAKE
     Transform columns in df if 'Apply Transformation' in summary_df is True.
     Use Box-Cox if applicable, otherwise Yeo-Johnson. Only numeric columns are transformed.
     """
@@ -166,7 +168,7 @@ def find_correlation(df, cutoff=0.75):
         # Compute mean correlations
         mean_corr1 = corr_matrix[var1].mean()
         mean_corr2 = corr_matrix[var2].mean()
-        
+
         # Drop the one with the higher mean correlation
         if mean_corr1 > mean_corr2:
             to_drop.add(var1)
@@ -176,3 +178,32 @@ def find_correlation(df, cutoff=0.75):
             corr_matrix.drop(index=var2, columns=var2, inplace=True)
     
     return list(to_drop)
+
+
+def plot_corr(df, figsize=(10, 8)):
+    """
+    Visualizes the correlation matrix of the DataFrame using seaborn heatmap.
+    Clusters the heatmap to group similar features together.
+    
+    Parameters:
+    df : pandas.DataFrame
+        The input DataFrame for which to visualize the correlation matrix.
+    """
+
+    # Calculate the correlation matrix
+    correlation_matrix = df.corr()
+
+    # Compute linkage on the correlation matrix (use ward linkage, like hclust in R)
+    linkage_matrix = linkage(correlation_matrix, method='ward')
+
+    # Reorder rows/columns according to clustering
+    reordered_indices = leaves_list(linkage_matrix)
+    correlation_matrix = correlation_matrix.iloc[reordered_indices, reordered_indices]
+
+    plt.figure(figsize=(10, 8))
+    sns.heatmap(correlation_matrix, cmap='coolwarm', center=0, square=True, linewidths=0.5)
+    plt.title("Correlation Matrix with Clustering")
+    plt.tight_layout()
+    plt.show()
+
+    return correlation_matrix
