@@ -8,7 +8,7 @@ This repository contains solutions and explorations based on *Applied Predictive
 
 The project is intended for educational purposes—for myself and for readers who want to follow the book but prefer working in Python. For that reason, the implementation is structured as a series of Jupyter Notebooks, making it easy to explore, modify, and visualize code step by step.
 
-This is **not** a strict line-by-line translation of the R code. Many chapters include extended analysis, custom helper functions, or additional visualizations that go beyond the original material—either because they offered good learning opportunities or were personally interesting to explore.
+This is **not** a strict line-by-line translation of the R code. Chapters include/will include extended analysis, custom helper functions, or additional visualizations that go beyond the original material—either because they offered good learning opportunities or were personally interesting to explore.
 
 The repository is a work in progress and will continue to be updated as I move through the source material.
 
