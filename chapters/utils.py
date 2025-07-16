@@ -8,10 +8,6 @@ from scipy.cluster.hierarchy import linkage, leaves_list
 
 def check_transform_suitability(df, save_csv=False, skew_bias=True, csv_path='transform_suitability.csv'):
     """
-    UPDATE DESCRIPTION:
-    Check suitability of each column for Box-Cox and Yeo-Johnson transformations,
-    and report missing value stats.
-    
     Parameters:
     - df: pandas DataFrame
     - save_csv: bool, whether to save the summary dataframe to a csv file (default False)
@@ -144,6 +140,17 @@ def near_zero_var(df, freq_cut=95/5, unique_cut=10):
 
 
 def find_correlation(df, cutoff=0.75):
+    """
+    Parameters:
+    df : pandas.DataFrame
+        The input DataFrame for which to find highly correlated features.
+    cutoff : float, optional (default=0.75)
+        The correlation threshold above which features are considered highly correlated.
+    
+    Returns:
+    list : 
+        A list of column names that are highly correlated with at least one other column
+    """
     # Compute the correlation matrix and take the absolute value
     corr_matrix = df.corr().abs()
     
@@ -188,6 +195,12 @@ def plot_corr(df, figsize=(10, 8)):
     Parameters:
     df : pandas.DataFrame
         The input DataFrame for which to visualize the correlation matrix.
+    figsize : tuple, optional (default=(10, 8))
+        The size of the figure for the heatmap.
+    
+    Returns:
+    correlation_matrix : pandas.DataFrame
+        The reordered correlation matrix after clustering.
     """
 
     # Calculate the correlation matrix
