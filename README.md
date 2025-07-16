@@ -2,6 +2,8 @@
 
 ## Project Description
 
+**Started:** July 2025
+
 This repository contains solutions and explorations based on *Applied Predictive Modeling* by Max Kuhn and Kjell Johnson. While the original book uses R, all work here is implemented in Python.
 
 The project is intended for educational purposes—for myself and for readers who want to follow the book but prefer working in Python. For that reason, the implementation is structured as a series of Jupyter Notebooks, making it easy to explore, modify, and visualize code step by step.
@@ -39,7 +41,7 @@ conda activate apm_projects
 
 *Note:* The environment file is provided for convenience but may occasionally lag behind the current environment, as updates are made continuously throughout the project. If you encounter missing packages, installing them manually post envrionment activation with conda or pip should resolve the issue. 
 
-Additionally, it should be noted that the repository is currently structured with relative paths. For smooth execution of notebooks, ensure the working directory remains the project root when running Jupyter.
+Additionally, it should be noted that the repository is currently structured with relative paths. For smooth execution of notebooks, ensure the working directory remains the specific notebook folder of interest when running jupyter.
 
 ## Repository Structure
 
@@ -53,4 +55,6 @@ Additionally, it should be noted that the repository is currently structured wit
 
 ## Data Access
 
-The file `access_data.md` provides an example of how to extract datasets directly from R, for those who wish to start from scratch rather than reuse the pre-converted Parquet files provided in the data folder.
+The folder named data contains all data sets stored as .parquet files. These files are automatically loaded doing the initializations of each chapter notebook. As several data sets are used in multiple chapters, there are no sub-folders. 
+
+For readers who may wish to start from scratch rather than reuse the pre-converted parquet files provided in the data folder, the file `access_data.md` provides an example of how to extract datasets directly from R.
