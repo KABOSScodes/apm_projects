@@ -152,7 +152,7 @@ def find_correlation(df, cutoff=0.75):
         A list of column names that are highly correlated with at least one other column
     """
     # Compute the correlation matrix and take the absolute value
-    corr_matrix = df.corr().abs()
+    corr_matrix = df.corr().abs().round(4)
     
     # Fill the diagonal with 0s so we don't compare a variable to itself
     np.fill_diagonal(corr_matrix.values, 0)
@@ -213,7 +213,7 @@ def plot_corr(df, figsize=(10, 8)):
     reordered_indices = leaves_list(linkage_matrix)
     correlation_matrix = correlation_matrix.iloc[reordered_indices, reordered_indices]
 
-    plt.figure(figsize=(10, 8))
+    plt.figure(figsize=figsize)
     sns.heatmap(correlation_matrix, cmap='coolwarm', center=0, square=True, linewidths=0.5)
     plt.title("Correlation Matrix with Clustering")
     plt.tight_layout()

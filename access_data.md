@@ -23,6 +23,10 @@ Load arrow and save the dataset:
 Or
 - `write_parquet(segmentationOriginal, "~/Desktop/apm_projects/data/segmentation.parquet", compression = "snappy")`
 
+### Note on the BloodBrain Dataset
+For the BloodBrain dataset (from the caret package), the outcome (logBBB) is stored as a separate vector from the predictors (bbbDescr). To save it as a single data frame, we first combine them:
+- `bbb_data <- cbind(logBBB = logBBB, bbbDescr)`
+
 ## In python
 Load dataset:
 - `import pandas as pd`
