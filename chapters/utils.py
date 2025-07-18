@@ -139,52 +139,51 @@ def near_zero_var(df, freq_cut=95/5, unique_cut=10):
     return nzv
 
 
-def find_correlation(df, cutoff=0.75):
+def find_correlation(df, cutoff=0.75, exact=True):
     """
     Parameters:
     df : pandas.DataFrame
         The input DataFrame for which to find highly correlated features.
     cutoff : float, optional (default=0.75)
         The correlation threshold above which features are considered highly correlated.
+    exact : boolean, optional (deafult=True)
+        If True, use the exact (but slower) algorithm for finding correlated features.
+        If False, use a faster, approximate method. The exact method is more precise,
+        but may be slower for large datasets.
     
     Returns:
     list : 
         A list of column names that are highly correlated with at least one other column
     """
-    # Compute the correlation matrix and take the absolute value
-    corr_matrix = df.corr().abs().round(4)
-    
-    # Fill the diagonal with 0s so we don't compare a variable to itself
-    np.fill_diagonal(corr_matrix.values, 0)
-    
-    # Track columns to drop
-    to_drop = set()
-    
-    while True:
-        # Find the index (i, j) of the highest correlation
-        max_corr = corr_matrix.max().max()
-        if max_corr < cutoff:
-            break  # Stop if no correlation above cutoff
-        
-        # Get index of the most highly correlated pair
-        col1, col2 = np.where(corr_matrix == max_corr)
-        col1, col2 = col1[0], col2[0]
-        var1 = corr_matrix.columns[col1]
-        var2 = corr_matrix.columns[col2]
-        
-        # Compute mean correlations
-        mean_corr1 = corr_matrix[var1].mean()
-        mean_corr2 = corr_matrix[var2].mean()
 
-        # Drop the one with the higher mean correlation
-        if mean_corr1 > mean_corr2:
-            to_drop.add(var1)
-            corr_matrix.drop(index=var1, columns=var1, inplace=True)
-        else:
-            to_drop.add(var2)
-            corr_matrix.drop(index=var2, columns=var2, inplace=True)
-    
-    return list(to_drop)
+
+    def _find_correlation_fast(corr, cutoff):
+        # Compute mean correlations
+        avg = corr.mean() 
+            
+        # Find all pairs above the cutoff (lower triangle only)
+        high_corr_pairs = corr.where(np.tril(np.ones(corr.shape), k=-1).astype(bool) & (corr > cutoff)).stack().index
+
+        # Split into rows and columns
+        rows_to_check = high_corr_pairs.get_level_values(0)
+        cols_to_check = high_corr_pairs.get_level_values(1)
+
+        # Create mask
+        msk = avg[cols_to_check] > avg[rows_to_check].values # Comparison of mean correlations
+
+        # Use mask to only return features that had greatest average mean correlation.
+        cols_to_delete = pd.unique(np.r_[cols_to_check[msk], rows_to_check[~msk]]).tolist()
+
+        return cols_to_delete
+
+    def _find_correlation_exact(corr, cutoff):
+        # TODO: Implement exact correlation removal logic
+        pass
+
+    corr_matrix = df.corr().abs()
+    cols_to_delete = _find_correlation_fast(corr_matrix, cutoff)
+
+    return cols_to_delete
 
 
 def plot_corr(df, figsize=(10, 8)):
