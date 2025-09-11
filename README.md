@@ -2,8 +2,6 @@
 
 ## Project Description
 
-**Started:** July 2025
-
 This repository contains solutions and explorations based on *Applied Predictive Modeling* by Max Kuhn and Kjell Johnson. While the original book uses R, all work here is implemented in Python.
 
 The project is intended for educational purposes—for myself and for readers who want to follow the book but prefer working in Python. For that reason, the implementation is structured as a series of Jupyter Notebooks, making it easy to explore, modify, and visualize code step by step.
