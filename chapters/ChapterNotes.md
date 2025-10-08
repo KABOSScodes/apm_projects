@@ -13,8 +13,8 @@ To generate a test set using **maximum dissimilarity sampling**, the caret funct
 
 | Sampling              | Notes |
 |------------------------|-------|
-| Random                 | Each sample is chosen by chance, giving all data points an equal probability of selection. |
-| Stratified             | Data is divided into groups (strata), and samples are taken from each group to preserve proportional representation. |
+| Random splits                | Each sample is chosen by chance, giving all data points an equal probability of selection. |
+| Stratified random splits            | Data is divided into groups (strata), and samples are taken from each group to preserve proportional representation. |
 | Maximum Dissimilarity  | Samples are chosen to be as different from each other as possible, ensuring wide coverage of the data space. |
 
 **In R**
