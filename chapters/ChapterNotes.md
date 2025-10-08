@@ -19,6 +19,7 @@ To generate a test set using **maximum dissimilarity sampling**, the caret funct
 
 **In R**
 classes: Outcome vector
+
 predictors: Matrix with 2 columns. 1 for each predictor of the class.
 
 ```r
