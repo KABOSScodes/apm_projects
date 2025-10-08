@@ -142,4 +142,3 @@ dependencies:
       - pillow==11.3.0
       - pyparsing==3.2.3
       - scienceplots==2.1.2.dev12+g350264b
-prefix: /Users/kasperboss/miniconda3/envs/apm_projects_env
