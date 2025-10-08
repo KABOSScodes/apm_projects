@@ -21,25 +21,28 @@ To generate a test set using **maximum dissimilarity sampling**, the caret funct
 classes: Outcome vector
 predictors: Matrix with 2 columns. 1 for each predictor of the class.
 
-> `set.seed(1)`
-> `trainingRows <- createDataPartition(classes, p = .80, list= FALSE)`
-p = .80 sets percent allocated to training set.
-list = FALSE, a matrix of row numbers is generated. These samples are allocated to the training set.
-> `head(trainingRows)`
-     Resample1
-[1,]        99
-[2,]       100
-[3,]       101
-[4,]       102
-[5,]       103
-[6,]       104
+```r
+set.seed(1)
+trainingRows <- createDataPartition(classes, p = .80, list = FALSE)
+# p = .80 sets percent allocated to training set.
+# list = FALSE: a matrix of row numbers is generated. These samples are allocated to the training set.
+
+head(trainingRows)
+       Resample1
+[1,]          99
+[2,]         100
+[3,]         101
+[4,]         102
+[5,]         103
+[6,]         104
+```
 
 Subset the data into objects for training using integer sub-setting.
-> `trainPredictors <- predictors[trainingRows, ]`
-> `trainClasses <- classes[trainingRows]`
+`trainPredictors <- predictors[trainingRows, ]`
+`trainClasses <- classes[trainingRows]`
 Do the same for the test set using negative integers.
-> `testPredictors <- predictors[-trainingRows, ]`
-> `testClasses <- classes[-trainingRows]`
+`testPredictors <- predictors[-trainingRows, ]`
+`testClasses <- classes[-trainingRows]`
 
 ```
 > str(trainPredictors)
@@ -55,5 +58,11 @@ Do the same for the test set using negative integers.
 ```
 
 
-
 **In Python**
+````
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, 
+    train_size=0.8, 
+    random_state=1,   # same as set.seed(1)
+    stratify=y        # ensures class proportions are preserved
+)```
