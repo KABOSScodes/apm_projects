@@ -35,34 +35,31 @@ head(trainingRows)
 [4,]         102
 [5,]         103
 [6,]         104
-```
 
-Subset the data into objects for training using integer sub-setting.
-`trainPredictors <- predictors[trainingRows, ]`
-`trainClasses <- classes[trainingRows]`
-Do the same for the test set using negative integers.
-`testPredictors <- predictors[-trainingRows, ]`
-`testClasses <- classes[-trainingRows]`
+# Subset the data into objects for training using integer sub-setting.
+trainPredictors <- predictors[trainingRows, ]
+trainClasses <- classes[trainingRows]
+# Do the same for the test set using negative integers.
+testPredictors <- predictors[-trainingRows, ]
+testClasses <- classes[-trainingRows]
 
-```
-> str(trainPredictors)
+str(trainPredictors)
    'data.frame': 167 obs. of 2 variables:
    $ PredictorA: num 0.226 0.262 0.52 0.577 0.426 ... 
    $ PredictorB: num 0.291 0.225 0.547 0.553 0.321 ...
-```
-```
-> str(testPredictors)
+
+str(testPredictors)
    'data.frame': 41 obs. of 2 variables:
    $ PredictorA: num 0.0658 0.1056 0.2909 0.4129 0.0472 ... 
    $ PredictorB: num 0.1786 0.0801 0.3021 0.2869 0.0414 ...
 ```
 
-
 **In Python**
-````
+```python
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, 
     train_size=0.8, 
     random_state=1,   # same as set.seed(1)
     stratify=y        # ensures class proportions are preserved
-)```
+)
+```
