@@ -74,17 +74,12 @@ The caret package has various functions for data splitting. For example, to use 
 > repeatedSplits <- createDataPartition(trainClasses, p = .80, times = 3)
 
 > str(repeatedSplits)
-List of 3
-$ Resample1: int [1:135] 1 2 3 4 5 6 7 9 11 12 ...
-$ Resample2: int [1:135] 4 6 7 8 9 10 11 12 13 14 ... $ Resample3: int [1:135] 2 3 4 6 7 8 9 10 11 12 ...
+  List of 3
+   $ Resample1: int [1:135] 1 2 3 4 5 6 7 9 11 12 ...
+   $ Resample2: int [1:135] 4 6 7 8 9 10 11 12 13 14 ... 
+   $ Resample3: int [1:135] 2 3 4 6 7 8 9 10 11 12 ...
 ```
 
-| Function             | Purpose / Description |
-|----------------------|---------------------|
-| `createDataPartition` | Creates training/test splits. Can generate repeated splits using the `times` argument. |
-| `createResamples`     | Generates bootstrap resamples of the dataset. |
-| `createFolds`         | Creates indices for k-fold cross-validation. |
-| `createMultiFolds`    | Creates indices for repeated k-fold cross-validation. |
 
 **Example**
 ```r
@@ -102,5 +97,21 @@ $ Resample2: int [1:135] 4 6 7 8 9 10 11 12 13 14 ... $ Resample3: int [1:135] 2
    $ Fold08: int [1:151] 1 2 3 4 5 6 7 8 9 10 ...
    $ Fold09: int [1:150] 1 3 4 5 6 7 9 10 11 12 ...
    $ Fold10: int [1:150] 1 2 3 5 6 7 8 9 10 11 ...
-# Get the first set of row numbers from the list.
-> fold1 <- cvSplits[[1]]
+
+# To get the first 90 % of the data (the first fold):
+> cvPredictors1 <- trainPredictors[fold1,]
+> cvClasses1 <- trainClasses[fold1]
+> nrow(trainPredictors)
+[1] 167
+> nrow(cvPredictors1)
+[1] 151
+```
+
+**Sampling Summary**
+| Function in R (`caret`) | Python Equivalent (`scikit-learn`) | Purpose / Description |
+|--------------------------|------------------------------------|------------------------|
+| `sample` | `train_test_split()` | Creates simple random training/test splits without stratification. |
+| `createDataPartition` | `train_test_split(..., stratify=y)` | Creates **stratified** training/test splits to preserve class proportions. The `times` argument for the R function allows generation of repeated random splits (Monte Carlo cross-validation). |
+| `createResamples` | `sklearn.utils.resample()` | Generates **bootstrap resamples** (sampling with replacement) to estimate model variability or confidence intervals. Each resample is the same size as the original data. |
+| `createFolds` | `KFold()` / `StratifiedKFold()` | Creates indices for **k-fold cross-validation**. Data are split into *k* parts, training occurs on *k−1* folds, and validation on the remaining one. Stratified variants preserve class balance. |
+| `createMultiFolds` | `RepeatedKFold()` / `RepeatedStratifiedKFold()` | Creates indices for **repeated k-fold cross-validation**, repeating the k-fold process multiple times with different random partitions for more stable performance estimates. |
