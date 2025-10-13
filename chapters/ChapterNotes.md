@@ -4,7 +4,7 @@ The attempt with this file is to abbreviate the learnings and procedures from th
 This file will be gradually developed in parallel with the assignments from Chapter 3 onwards, while notes from Chapters 1 and 2 will be added at a later stage.
 
 ## Chapter 3: Over-Fitting and Model Tuning
-### Data splitting
+### Data Splitting
 The base R function **sample** can create simple random splits of the data. To create stratified random splits of the data (based on the classes), the **createDataPartition** function in the **caret** package can be used. The percent of data that will be allocated to the training set should be specified.
 
 When creating stratified splits, the seed should be set to ensure results are reproducible. 
@@ -115,3 +115,10 @@ The caret package has various functions for data splitting. For example, to use 
 | `createResamples` | `sklearn.utils.resample()` | Generates **bootstrap resamples** (sampling with replacement) to estimate model variability or confidence intervals. Each resample is the same size as the original data. |
 | `createFolds` | `KFold()` / `StratifiedKFold()` | Creates indices for **k-fold cross-validation**. Data are split into *k* parts, training occurs on *k−1* folds, and validation on the remaining one. Stratified variants preserve class balance. |
 | `createMultiFolds` | `RepeatedKFold()` / `RepeatedStratifiedKFold()` | Creates indices for **repeated k-fold cross-validation**, repeating the k-fold process multiple times with different random partitions for more stable performance estimates. |
+
+There is also LOOCV which fits as many models as there are samples in the training set. This should only be considered when number of samples is very small. 
+
+### Choosing Tuning Parameters
+**Book: Section 4.6**
+> The “one-standard error” method for choosing simpler models finds the nu- merically optimal value and its corresponding standard error and then seeks the simplest model whose performance is within a single standard error of the numerically best value. This procedure originated with classification and regression trees (Breiman et al. (1984) and Sects. 8.1 and 14.1). In Fig. 4.10, the standard error of the accuracy values when the cost is 8 is about 0.7 %. This technique would find the simplest tuning parameter settings associated with accuracy no less than 74.3 % (75 %–0.7 %). This procedure would choose a value of 2 for the cost parameter.
+> Another approach is to choose a simpler model that is within a certain tolerance of the numerically best value. The percent decrease in performance could be quantified by (X − O)/O where X is the performance value and O is the numerically optimal value. For example, in Fig. 4.9, the best accuracy value across the profile was 75 %. If a 4 % loss in accuracy was acceptable as a trade-off for a simpler model, accuracy values greater than 71.2% would be acceptable. For the profile in Fig.4.9, a cost value of 1 would be chosen using this approach.
