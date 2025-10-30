@@ -44,6 +44,7 @@ If you split such data randomly, you could end up training on some repeats and t
 
 
 > If classes are evenly prevalent and samples are independent, a random split can technically be used instead of a stratified split.
+
 > Stratified splits can also be used for numerical targets by binning the continuous target variable into quantiles or intervals and then stratifying based on those bins. However, stratification is most relevant with categorical targets.
 
 ---
