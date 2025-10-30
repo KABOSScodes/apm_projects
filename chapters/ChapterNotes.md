@@ -40,19 +40,10 @@ If you split such data randomly, you could end up training on some repeats and t
 | Grouped or repeated samples | Grouped split | `groupKFold` (via `rsample` or custom) | `GroupKFold()` | Keep related samples together |
 | Time-ordered data | Time-series split | `createTimeSlices` | `TimeSeriesSplit()` | Avoid future leakage |
 | Small dataset | Resampling (bootstrap or k-fold) | `createResamples`, `createFolds` | `Bootstrap()`, `KFold()` | Provides more stable estimates |
+| Want diverse test set covering edge cases|Max dissimilarity sampling | `maxdissim()` | No equivalent in python | Selects most dissimilar samples from training set based on predictors |
 
 > Use stratify=y (Python) or createDataPartition(y, p=0.8) (R) when the target variable is categorical and you want to preserve class balance between training and test sets. This is not strictly necessary if classes are evenly distributed.
 > In regression, “stratified” splits are sometimes approximated by binning the continuous target variable into quantiles or intervals and then stratifying based on those bins. However, stratification is most relevant with categorical targets.
-
----
-
-#### Split Ratios
-
-| Dataset Size | Typical Split | Notes |
-|---------------|---------------|-------|
-| Large (>10k) | 70–80% train / 20–30% test | Simple holdout is sufficient |
-| Medium | 70% train / 15% validation / 15% test | Three-way split for tuning |
-| Small | Cross-validation | Reduces variance and bias |
 
 ---
 
@@ -91,6 +82,17 @@ There is a strong technical case to be made **against using a single, independen
   - The uncertainty of the test set can be considerably large to the point where different test sets may produce very different results.  
 - Resampling methods can produce reasonable predictions of how well the model will perform on future samples.
 
+**Choosing a Resampling Method**
+
+- No single resampling method is uniformly best — the choice depends on sample size, computational cost, and purpose.
+- **Small sample sizes:**  
+  - Use **repeated 10-fold cross-validation**.  
+  - Offers good bias–variance balance and low computational cost.
+- **Model comparison (not just performance estimation):**  
+  - Use a **bootstrap method** — it provides very low variance in estimates.
+- **Large sample sizes:**  
+  - Differences between resampling methods are minor and computational is of great importance.  
+  - **Simple 10-fold cross-validation** is efficient, low-bias, and typically sufficient.
 
 ---
 
