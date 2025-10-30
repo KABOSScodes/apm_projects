@@ -1,21 +1,104 @@
 # Chapter Notes
 The attempt with this file is to abbreviate the learnings and procedures from the chapters as further assistance in future endeavors. 
 
-This file will be gradually developed in parallel with the assignments from Chapter 3 onwards, while notes from Chapters 1 and 2 will be added at a later stage.
+This file will be gradually developed in parallel with the assignments from Chapter 4 onwards, while notes from Chapters 1, 2, and 3 will be added at a later stage.
 
-## Chapter 3: Over-Fitting and Model Tuning
-### Data Splitting
-The base R function **sample** can create simple random splits of the data. To create stratified random splits of the data (based on the classes), the **createDataPartition** function in the **caret** package can be used. The percent of data that will be allocated to the training set should be specified.
+## Chapter 4: Over-Fitting and Model Tuning
+### 4.1 Data Splitting
 
-When creating stratified splits, the seed should be set to ensure results are reproducible. 
+Data splitting defines how to create independent subsets for model development and evaluation.  
+Choice of splitting method depends on the characteristics of the dataset (e.g., classification vs regression and/or independence of samples).
 
-To generate a test set using **maximum dissimilarity sampling**, the caret function **maxdissim** can be used to sequentially sample the data.
+> With all splitting, it is crucial to set the seed number to ensure reproducibility.
 
-| Sampling              | Notes |
-|------------------------|-------|
-| Random splits                | Each sample is chosen by chance, giving all data points an equal probability of selection. |
-| Stratified random splits            | Data is divided into groups (strata), and samples are taken from each group to preserve proportional representation. |
-| Maximum Dissimilarity  | Samples are chosen to be as different from each other as possible, ensuring wide coverage of the data space. |
+---
+
+#### Identify Data Characteristics
+When deciding how to split or resample, check:
+
+- Is the target class of categorical type and are classes equally prominent (classification)?
+- Is the **target distribution** imbalanced?
+- Are samples **independent**, or grouped/repeated?
+- Is there **temporal order** (not introduced in this chapter)?
+
+Grouped or "repeated" samples mean multiple observations that belong together logically — e.g.:
+
+- Several measurements from the same patient (grouped)
+- Multiple tests on the same experimental batch (grouped)
+- Replicate experiments (repeated)
+
+If you split such data randomly, you could end up training on some repeats and testing on others -> data leakage.
+
+---
+
+#### Split Strategy Selection
+
+| Data Characteristics | Recommended Split | R (`caret`) | Python (`scikit-learn`) | Notes |
+|----------------------|------------------|--------------|--------------------------|-------|
+| Independent samples, no classes | Simple random split | `sample` | `train_test_split()` | Default case |
+| Independent samples, classes present | Stratified split | `createDataPartition` | `train_test_split(..., stratify=y)` | Preserves class ratios |
+| Grouped or repeated samples | Grouped split | `groupKFold` (via `rsample` or custom) | `GroupKFold()` | Keep related samples together |
+| Time-ordered data | Time-series split | `createTimeSlices` | `TimeSeriesSplit()` | Avoid future leakage |
+| Small dataset | Resampling (bootstrap or k-fold) | `createResamples`, `createFolds` | `Bootstrap()`, `KFold()` | Provides more stable estimates |
+
+> Use stratify=y (Python) or createDataPartition(y, p=0.8) (R) when the target variable is categorical and you want to preserve class balance between training and test sets. This is not strictly necessary if classes are evenly distributed.
+> In regression, “stratified” splits are sometimes approximated by binning the continuous target variable into quantiles or intervals and then stratifying based on those bins. However, stratification is most relevant with categorical targets.
+
+---
+
+#### Split Ratios
+
+| Dataset Size | Typical Split | Notes |
+|---------------|---------------|-------|
+| Large (>10k) | 70–80% train / 20–30% test | Simple holdout is sufficient |
+| Medium | 70% train / 15% validation / 15% test | Three-way split for tuning |
+| Small | Cross-validation | Reduces variance and bias |
+
+---
+
+#### Resampling Methods (Overview)
+
+| Method | Purpose | Key Parameters | Notes |
+|---------|----------|----------------|-------|
+| Bootstrap | Estimate model variability | `times`, `replace=TRUE` | Sampling with replacement |
+| k-Fold CV | Estimate generalization error | `k` | Train on *k−1*, test on 1 |
+| Repeated k-Fold | Reduce variance of k-Fold estimates | `repeats` | More stable estimates |
+| Leave-One-Out CV | Maximize training data | — | High computational cost |
+| Monte Carlo CV | Random repeated train/test splits | `times` | Similar to repeated hold-out |
+
+Resampling methods repeatedly create different training/test subsets to estimate model performance and reduce variance due to a single data split.
+
+| Method | Description | Purpose | Typical Use Case |
+|---------|--------------|----------|------------------|
+| **Bootstrap** | Random sampling *with replacement* to create resamples the same size as the original dataset. | Estimate model variability or confidence intervals. | Small datasets; assessing model stability. |
+| **k-Fold Cross-Validation** | Split data into *k* folds; train on *k−1*, validate on the remaining fold. Repeat *k* times. | Estimate model generalization error. | Standard approach for model evaluation and tuning. |
+| **Repeated k-Fold CV** | Repeat k-fold CV multiple times with different random partitions. | Reduce variance of performance estimates. | More stable performance metrics. |
+| **Leave-One-Out CV (LOOCV)** | Special case of k-fold where *k = n* (one sample per test set). | Maximizes training data use. | Very small datasets; computationally expensive. |
+| **Monte Carlo (Repeated Random Splits)** | Perform repeated random train/test splits (hold-out validation). | Simple alternative to k-fold CV. | Fast approximate validation. |
+
+---
+
+#### Data Splitting Recommendations
+
+Obtained from book section 4.7:
+
+There is a strong technical case to be made **against using a single, independent test set**:
+
+- A test set is a single evaluation of the model and has limited ability to characterize the uncertainty in the results.  
+- Proportionally large test sets divide the data in a way that increases bias in the performance estimates.  
+- With small sample sizes:
+  - The model may need every possible data point to adequately determine model values.  
+  - The uncertainty of the test set can be considerably large to the point where different test sets may produce very different results.  
+- Resampling methods can produce reasonable predictions of how well the model will perform on future samples.
+
+
+---
+
+<!-- **Next:** Proceed to [Resampling Strategies](#42-resampling-strategies) for more details on bootstrap, k-fold, and repeated cross-validation. -->
+
+---
+
+#### Sampling implementations
 
 **In R**
 
@@ -120,6 +203,6 @@ There is also LOOCV which fits as many models as there are samples in the traini
 
 ### Choosing Tuning Parameters
 **Book: Section 4.6**
-> The “one-standard error” method for choosing simpler models finds the nu- merically optimal value and its corresponding standard error and then seeks the simplest model whose performance is within a single standard error of the numerically best value. This procedure originated with classification and regression trees (Breiman et al. (1984) and Sects. 8.1 and 14.1). In Fig. 4.10, the standard error of the accuracy values when the cost is 8 is about 0.7 %. This technique would find the simplest tuning parameter settings associated with accuracy no less than 74.3 % (75 %–0.7 %). This procedure would choose a value of 2 for the cost parameter.
+> "The “one-standard error” method for choosing simpler models finds the numerically optimal value and its corresponding standard error and then seeks the simplest model whose performance is within a single standard error of the numerically best value. This procedure originated with classification and regression trees (Breiman et al. (1984) and Sects. 8.1 and 14.1). In Fig. 4.10, the standard error of the accuracy values when the cost is 8 is about 0.7 %. This technique would find the simplest tuning parameter settings associated with accuracy no less than 74.3 % (75 %–0.7 %). This procedure would choose a value of 2 for the cost parameter."
 
-> Another approach is to choose a simpler model that is within a certain tolerance of the numerically best value. The percent decrease in performance could be quantified by (X − O)/O where X is the performance value and O is the numerically optimal value. For example, in Fig. 4.9, the best accuracy value across the profile was 75 %. If a 4 % loss in accuracy was acceptable as a trade-off for a simpler model, accuracy values greater than 71.2% would be acceptable. For the profile in Fig.4.9, a cost value of 1 would be chosen using this approach.
+> "Another approach is to choose a simpler model that is within a certain tolerance of the numerically best value. The percent decrease in performance could be quantified by (X − O)/O where X is the performance value and O is the numerically optimal value. For example, in Fig. 4.9, the best accuracy value across the profile was 75 %. If a 4 % loss in accuracy was acceptable as a trade-off for a simpler model, accuracy values greater than 71.2% would be acceptable. For the profile in Fig.4.9, a cost value of 1 would be chosen using this approach."
