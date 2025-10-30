@@ -35,15 +35,15 @@ If you split such data randomly, you could end up training on some repeats and t
 
 | Data Characteristics | Recommended Split | R (`caret`) | Python (`scikit-learn`) | Notes |
 |----------------------|------------------|--------------|--------------------------|-------|
-| Independent samples, no classes | Simple random split | `sample` | `train_test_split()` | Default case |
-| Independent samples, classes present | Stratified split | `createDataPartition` | `train_test_split(..., stratify=y)` | Preserves class ratios |
+| Independent samples, non-categorical target | Simple random split | `sample` | `train_test_split()` | Default case |
+| Independent samples, categorical target | Stratified split | `createDataPartition` | `train_test_split(..., stratify=y)` | Preserves class ratios. See additional note below |
 | Grouped or repeated samples | Grouped split | `groupKFold` (via `rsample` or custom) | `GroupKFold()` | Keep related samples together |
 | Time-ordered data | Time-series split | `createTimeSlices` | `TimeSeriesSplit()` | Avoid future leakage |
 | Small dataset | Resampling (bootstrap or k-fold) | `createResamples`, `createFolds` | `Bootstrap()`, `KFold()` | Provides more stable estimates |
 | Want diverse test set covering edge cases|Max dissimilarity sampling | `maxdissim()` | No equivalent in python | Selects most dissimilar samples from training set based on predictors |
 
-> Use stratify=y (Python) or createDataPartition(y, p=0.8) (R) when the target variable is categorical and you want to preserve class balance between training and test sets. This is not strictly necessary if classes are evenly distributed.
-> In regression, “stratified” splits are sometimes approximated by binning the continuous target variable into quantiles or intervals and then stratifying based on those bins. However, stratification is most relevant with categorical targets.
+> If classes are evenly prevalent and samples are independent, a random split can technically be used instead of a stratified split.
+> Stratified splits can also be used for numerical targets by binning the continuous target variable into quantiles or intervals and then stratifying based on those bins. However, stratification is most relevant with categorical targets.
 
 ---
 
