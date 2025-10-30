@@ -37,9 +37,11 @@ If you split such data randomly, you could end up training on some repeats and t
 |----------------------|------------------|--------------|--------------------------|-------|
 | Independent samples, non-categorical target | Simple random split | `sample` | `train_test_split()` | Default case |
 | Independent samples, categorical target | Stratified split | `createDataPartition` | `train_test_split(..., stratify=y)` | Preserves class ratios. See additional notes below. |
-| Grouped or repeated samples | Grouped split | `groupKFold` (via `rsample` or custom) | `GroupKFold()` | Keep related samples together |
+| Grouped or repeated samples | Grouped split | `group_vfold_cv()` (via `rsample`) or custom | `GroupShuffleSplit` | Keep related samples together |
+| Grouped samples + imbalanced classes | Stratified grouped split | Custom implementation in R | `StratifiedGroupKFold()` | Preserve group integrity and class proportions in train/test split. |
 | Time-ordered data | Time-series split | `createTimeSlices` | `TimeSeriesSplit()` | Avoid future leakage |
 | Want diverse test set covering edge cases|Max dissimilarity sampling | `maxdissim()` | No equivalent in python | Selects most dissimilar samples from training set based on predictors |
+
 
 > If classes are evenly prevalent and samples are independent, a random split can technically be used instead of a stratified split.
 > Stratified splits can also be used for numerical targets by binning the continuous target variable into quantiles or intervals and then stratifying based on those bins. However, stratification is most relevant with categorical targets.
