@@ -69,6 +69,20 @@ Resampling methods repeatedly create different training/test subsets to estimate
 | **Leave-One-Out CV (LOOCV)** | Special case of k-fold where *k = n* (one sample per test set). | Maximizes training data use. | Very small datasets; computationally expensive. |
 | **Monte Carlo (Repeated Random Splits)** | Perform repeated random train/test splits (hold-out validation). | Simple alternative to k-fold CV. | Fast approximate validation. |
 
+| Method | Description | Recommended Use / Key Considerations |
+|--------|-------------|------------------------------------|
+| **Bootstrap** | Random sampling *with replacement* to create resamples the same size as the original dataset. | Good for **model comparison** when variance should be low; small datasets; estimating model variability. |
+| **k-Fold Cross-Validation** | Split data into *k* folds; train on *k−1*, validate on the remaining fold. | Standard choice for model evaluation and tuning; use **10-fold** for small to medium datasets. |
+| **Repeated k-Fold CV** | Repeat k-fold CV multiple times with different random partitions. | Recommended for **small sample sizes** to reduce variance; balances bias and variance. |
+| **Leave-One-Out CV (LOOCV)** | Special case of k-fold where *k = n*. | Very small datasets; high computational cost; maximizes training data. |
+| **Monte Carlo / Repeated Random Splits** | Perform repeated random train/test splits (hold-out validation). | Quick approximation; variance can be higher; sometimes used for small datasets when repeated CV is too slow. |
+
+> **Choosing a Resampling Method (Kuhn & Johnson)**  
+> - No method is uniformly best; consider sample size, purpose, and computation.  
+> - **Small datasets:** repeated 10-fold CV — good bias–variance balance, manageable cost.  
+> - **Model comparison:** bootstrap — low variance in performance estimates.  
+> - **Large datasets:** differences between methods are minor; 10-fold CV is efficient and generally sufficient.
+
 ---
 
 #### Data Splitting Recommendations
@@ -100,9 +114,7 @@ There is a strong technical case to be made **against using a single, independen
 
 <!-- **Next:** Proceed to [Resampling Strategies](#42-resampling-strategies) for more details on bootstrap, k-fold, and repeated cross-validation. -->
 
----
-
-#### Sampling implementations
+#### Splitting/Resampling implementations
 
 **In R**
 
