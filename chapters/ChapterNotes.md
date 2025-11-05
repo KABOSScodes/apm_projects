@@ -82,10 +82,8 @@ If you split such data randomly, you could end up training on some repeats and t
 
 ---
 
-<!-- **Next:** Proceed to [Resampling Strategies](#42-resampling-strategies) for more details on bootstrap, k-fold, and repeated cross-validation. -->
-
-#### Splitting/Resampling implementations
-
+### 4.2 Splitting/Resampling implementations
+#### Stratified Splits
 **In R**
 
 classes: Outcome vector
