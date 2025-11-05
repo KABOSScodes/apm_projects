@@ -13,6 +13,21 @@ Choice of splitting method depends on the characteristics of the dataset (e.g., 
 
 ---
 
+#### Data Splitting Recommendations
+
+Obtained from book section 4.7:
+
+There is a strong technical case to be made against using a single, independent test set:
+
+- A test set is a single evaluation of the model and has limited ability to characterize the uncertainty in the results.  
+- Proportionally large test sets divide the data in a way that increases bias in the performance estimates (due to less available data for training).  
+- With small sample sizes:
+  - The model may need every possible data point to adequately determine model values.  
+  - The uncertainty of the test set can be considerably large to the point where different test sets may produce very different results.  
+- Resampling methods can produce reasonable predictions of how well the model will perform on future samples.
+
+---
+
 #### Identify Data Characteristics
 When deciding how to split or resample, check:
 
@@ -35,7 +50,7 @@ If you split such data randomly, you could end up training on some repeats and t
 
 | Data Characteristics | Recommended Split | R (`caret`) | Python (`scikit-learn`) | Notes |
 |----------------------|------------------|--------------|--------------------------|-------|
-| Independent samples, non-categorical target | Simple random split | `sample` | `train_test_split()` | Default case |
+| Independent samples, non-categorical target | Simple random split | `sample` | `train_test_split()` | Default case. See additional notes below. |
 | Independent samples, categorical target | Stratified split | `createDataPartition` | `train_test_split(..., stratify=y)` | Preserves class ratios. See additional notes below. |
 | Grouped or repeated samples | Grouped split | `group_vfold_cv()` (via `rsample`) or custom | `GroupShuffleSplit` | Keep related samples together |
 | Grouped samples + imbalanced classes | Stratified grouped split | Custom implementation in R | `StratifiedGroupKFold()` | Preserve group integrity and class proportions in train/test split. |
@@ -64,33 +79,6 @@ If you split such data randomly, you could end up training on some repeats and t
 > - **Small datasets:** repeated 10-fold CV — good bias–variance balance, manageable cost.  
 > - **Model comparison:** bootstrap — low variance in performance estimates.  
 > - **Large datasets:** differences between methods are minor; 10-fold CV is efficient and generally sufficient.
-
----
-
-#### Data Splitting Recommendations
-
-Obtained from book section 4.7:
-
-There is a strong technical case to be made **against using a single, independent test set**:
-
-- A test set is a single evaluation of the model and has limited ability to characterize the uncertainty in the results.  
-- Proportionally large test sets divide the data in a way that increases bias in the performance estimates (due to less available data for training).  
-- With small sample sizes:
-  - The model may need every possible data point to adequately determine model values.  
-  - The uncertainty of the test set can be considerably large to the point where different test sets may produce very different results.  
-- Resampling methods can produce reasonable predictions of how well the model will perform on future samples.
-
-**Choosing a Resampling Method**
-
-- No single resampling method is uniformly best — the choice depends on sample size, computational cost, and purpose.
-- **Small sample sizes:**  
-  - Use **repeated 10-fold cross-validation**.  
-  - Offers good bias–variance balance and low computational cost.
-- **Model comparison (not just performance estimation):**  
-  - Use a **bootstrap method** — it provides very low variance in estimates.
-- **Large sample sizes:**  
-  - Differences between resampling methods are minor and computational is of great importance.  
-  - **Simple 10-fold cross-validation** is efficient, low-bias, and typically sufficient.
 
 ---
 
