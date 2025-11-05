@@ -51,24 +51,6 @@ If you split such data randomly, you could end up training on some repeats and t
 
 #### Resampling Methods (Overview)
 
-| Method | Purpose | Key Parameters | Notes |
-|---------|----------|----------------|-------|
-| Bootstrap | Estimate model variability | `times`, `replace=TRUE` | Sampling with replacement |
-| k-Fold CV | Estimate generalization error | `k` | Train on *k−1*, test on 1 |
-| Repeated k-Fold | Reduce variance of k-Fold estimates | `repeats` | More stable estimates |
-| Leave-One-Out CV | Maximize training data | — | High computational cost |
-| Monte Carlo CV | Random repeated train/test splits | `times` | Similar to repeated hold-out |
-
-Resampling methods repeatedly create different training/test subsets to estimate model performance and reduce variance due to a single data split.
-
-| Method | Description | Purpose | Typical Use Case |
-|---------|--------------|----------|------------------|
-| **Bootstrap** | Random sampling *with replacement* to create resamples the same size as the original dataset. | Estimate model variability or confidence intervals. | Small datasets; assessing model stability. |
-| **k-Fold Cross-Validation** | Split data into *k* folds; train on *k−1*, validate on the remaining fold. Repeat *k* times. | Estimate model generalization error. | Standard approach for model evaluation and tuning. |
-| **Repeated k-Fold CV** | Repeat k-fold CV multiple times with different random partitions. | Reduce variance of performance estimates. | More stable performance metrics. |
-| **Leave-One-Out CV (LOOCV)** | Special case of k-fold where *k = n* (one sample per test set). | Maximizes training data use. | Very small datasets; computationally expensive. |
-| **Monte Carlo (Repeated Random Splits)** | Perform repeated random train/test splits (hold-out validation). | Simple alternative to k-fold CV. | Fast approximate validation. |
-
 | Method | Description | Recommended Use / Key Considerations |
 |--------|-------------|------------------------------------|
 | **Bootstrap** | Random sampling *with replacement* to create resamples the same size as the original dataset. | Good for **model comparison** when variance should be low; small datasets; estimating model variability. |
@@ -92,7 +74,7 @@ Obtained from book section 4.7:
 There is a strong technical case to be made **against using a single, independent test set**:
 
 - A test set is a single evaluation of the model and has limited ability to characterize the uncertainty in the results.  
-- Proportionally large test sets divide the data in a way that increases bias in the performance estimates.  
+- Proportionally large test sets divide the data in a way that increases bias in the performance estimates (due to less available data for training).  
 - With small sample sizes:
   - The model may need every possible data point to adequately determine model values.  
   - The uncertainty of the test set can be considerably large to the point where different test sets may produce very different results.  
