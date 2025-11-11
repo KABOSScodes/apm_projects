@@ -68,11 +68,12 @@ If you split such data randomly, you could end up training on some repeats and t
 
 | Method | Description | Recommended Use / Key Considerations |
 |--------|-------------|------------------------------------|
-| **Bootstrap** | Random sampling *with replacement* to create resamples the same size as the original dataset. | Good for **model comparison** when variance should be low; small datasets; estimating model variability. |
+| **Monte Carlo / Repeated Random Splits** | Perform repeated random train/test splits with a fixed proportion (e.g., 80/20). | Flexible split ratio; fewer model fits than repeated k-fold CV; quick exploratory validation but higher variance and uneven sample coverage. |
+| **Repeated Stratified Split** | Same as Monte Carlo CV but preserves class proportions in target variable. | Same as Monte Carlo CV but preserves class proportions in target variable. |
+| **Bootstrap** | Random sampling *with replacement* to create resamples the same size as the original dataset. | Good for **model comparison** when variance should be low |
 | **k-Fold Cross-Validation** | Split data into *k* folds; train on *k−1*, validate on the remaining fold. | Standard choice for model evaluation and tuning; use **10-fold** for small to medium datasets. |
 | **Repeated k-Fold CV** | Repeat k-fold CV multiple times with different random partitions. | Recommended for **small sample sizes** to reduce variance; balances bias and variance. |
 | **Leave-One-Out CV (LOOCV)** | Special case of k-fold where *k = n*. | Very small datasets; high computational cost; maximizes training data. |
-| **Monte Carlo / Repeated Random Splits** | Perform repeated random train/test splits (hold-out validation). | Quick approximation; variance can be higher; sometimes used for small datasets when repeated CV is too slow. |
 
 > **Choosing a Resampling Method (Kuhn & Johnson)**  
 > - No method is uniformly best; consider sample size, purpose, and computation.  
@@ -84,7 +85,7 @@ If you split such data randomly, you could end up training on some repeats and t
 
 ### 4.2 Splitting/Resampling implementations
 #### Stratified Splits
-**In R**
+**Language: R**
 
 classes: Outcome vector
 
@@ -123,7 +124,7 @@ predictors: Matrix with 2 columns. 1 for each predictor of the class.
    $ PredictorB: num 0.1786 0.0801 0.3021 0.2869 0.0414 ...
 ```
 
-**In Python**
+**Language: Python**
 ```python
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, 
@@ -133,7 +134,7 @@ X_train, X_test, y_train, y_test = train_test_split(
 )
 ```
 
-### Resampling
+#### Resampling
 The caret package has various functions for data splitting. For example, to use repeated training/test splits, the function createDataPartition could be used again.
 
 ```r
@@ -146,7 +147,6 @@ The caret package has various functions for data splitting. For example, to use 
    $ Resample2: int [1:135] 4 6 7 8 9 10 11 12 13 14 ... 
    $ Resample3: int [1:135] 2 3 4 6 7 8 9 10 11 12 ...
 ```
-
 
 **Example**
 ```r
