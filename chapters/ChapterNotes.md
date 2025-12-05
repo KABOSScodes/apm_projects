@@ -216,13 +216,11 @@ There is also LOOCV which fits as many models as there are samples in the traini
 A common phenomenon with some tree-based methods is overprediction of low values and underprediction of high values. I such cases R2 needs to be used with care, but such a systematic bias in the predictions may be acceptable if the model otherwise works.
 
 **MSE**
-
 $$
 \text{MSE} = \frac{1}{n} \sum_{i=1}^n (y_i - \hat{y}_i)^2
 $$
 
 **RMSE**
-
 $$
 \text{RMSE} = \sqrt{\frac{1}{n} \sum_{i=1}^n (y_i - \hat{y}_i)^2}
 $$
