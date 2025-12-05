@@ -237,3 +237,11 @@ $$
 R^2 = 1 - \frac{MSE}{Var(y)}
 $$
 
+$$
+r = \frac{\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum_{i=1}^n (x_i - \bar{x})^2}\,\sqrt{\sum_{i=1}^n (y_i - \bar{y})^2}}
+$$
+
+$$
+r = 
+\frac{n\sum_{i=1}^n x_i y_i - \left(\sum_{i=1}^n x_i\right)\left(\sum_{i=1}^n y_i\right)}{\sqrt{\left[n\sum_{i=1}^n x_i^2 - \left(\sum_{i=1}^n x_i\right)^2\right]\left[n\sum_{i=1}^n y_i^2 - \left(\sum_{i=1}^n y_i\right)^2\right]}}
+$$
