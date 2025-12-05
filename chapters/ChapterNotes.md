@@ -199,4 +199,27 @@ There is also LOOCV which fits as many models as there are samples in the traini
 
 ## Chapter 5: Measuring Performance in Regression Models
 ### 4.1 Data Splitting
-To understand the strengths and weaknesses of a particular model, relying solely on a sin- gle metric is problematic. Visualizations of the model fit, particularly residual plots, are critical to understanding whether the model is fit for purpose.
+**This will purely contain direct quotes from the book until the information is better organized**
+
+>To understand the strengths and weaknesses of a particular model, relying solely on a single metric is problematic. Visualizations of the model fit, particularly residual plots, are critical to understanding whether the model is fit for purpose.
+
+> When the outcome is a number, the most common method for characteriz- ing a model’s predictive capabilities is to use the root mean squared error (RMSE). This metric is a function of the model residuals, which are the ob- served values minus the model predictions.
+
+> The mean squared error (MSE) is calculated by squaring the residuals and summing them. The RMSE is then calculated by taking the square root of the MSE so that it is in the same units as the original data.
+
+> Another common metric is the coefficient of determination, commonly written as R2. This value can be interpreted as the proportion of the information in the data that is explained by the model.
+
+> There are multiple formulas for calculating this quantity (Kv ̊alseth 1985), although the simplest version finds the correlation coefficient between the observed and predicted values (usually denoted by R) and squares it.
+
+> R2 is a measure of correlation, not accuracy.
+
+A common phenomenon with some tree-based methods is overprediction of low values and underprediction of high values. I such cases R2 needs to be used with care, but such a systematic bias in the predictions may be acceptable if the model otherwise works.
+
+**MSE**
+$$
+\text{MSE} = \frac{1}{n} \sum_{i=1}^n (y_i - \hat{y}_i)^2
+$$
+**RMSE**
+$$
+\text{RMSE} = \sqrt{\frac{1}{n} \sum_{i=1}^n (y_i - \hat{y}_i)^2}
+$$
