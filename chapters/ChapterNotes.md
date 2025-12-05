@@ -237,11 +237,26 @@ $$
 R^2 = 1 - \frac{MSE}{Var(y)}
 $$
 
+
+With r being the correlation coefficient:
+
+$$
+R^2 = r^2
+$$
+
+**Pearson's correlation coefficient - Conceptual Formula**
+* Numerator = covariance
+* Denominator = product of standard deviations
+* Slow computation
+
 $$
 r = \frac{\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum_{i=1}^n (x_i - \bar{x})^2}\,\sqrt{\sum_{i=1}^n (y_i - \bar{y})^2}}
 $$
 
+**Pearson's correlation coefficient - Computational shortcut**
+
 $$
-r = 
-\frac{n\sum_{i=1}^n x_i y_i - \left(\sum_{i=1}^n x_i\right)\left(\sum_{i=1}^n y_i\right)}{\sqrt{\left[n\sum_{i=1}^n x_i^2 - \left(\sum_{i=1}^n x_i\right)^2\right]\left[n\sum_{i=1}^n y_i^2 - \left(\sum_{i=1}^n y_i\right)^2\right]}}
+\[
+r = \frac{n \sum x y - (\sum x)(\sum y)}
+{\sqrt{\left[ n \sum x^2 - (\sum x)^2 \right] \left[ n \sum y^2 - (\sum y)^2 \right]}}\]
 $$
