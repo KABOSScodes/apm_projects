@@ -207,16 +207,6 @@ There is also LOOCV which fits as many models as there are samples in the traini
 
 > The mean squared error (MSE) is calculated by squaring the residuals and summing them. The RMSE is then calculated by taking the square root of the MSE so that it is in the same units as the original data.
 
-> Another common metric is the coefficient of determination, commonly written as R2. This value can be interpreted as the proportion of the information in the data that is explained by the model.
-
-> There are multiple formulas for calculating this quantity (Kv ̊alseth 1985), although the simplest version finds the correlation coefficient between the observed and predicted values (usually denoted by R) and squares it.
-
-> R2 is a measure of correlation, not accuracy.
-
-A common phenomenon with some tree-based methods is overprediction of low values and underprediction of high values. I such cases R2 needs to be used with care, but such a systematic bias in the predictions may be acceptable if the model otherwise works.
-
-
-
 **MSE**
 
 $$
@@ -228,3 +218,22 @@ $$
 $$
 \text{RMSE} = \sqrt{MSE} = \sqrt{\frac{1}{n} \sum_{i=1}^n (y_i - \hat{y}_i)^2}
 $$
+
+> Another common metric is the coefficient of determination, commonly written as R2. This value can be interpreted as the proportion of the information in the data that is explained by the model.
+
+> There are multiple formulas for calculating this quantity (Kv ̊alseth 1985), although the simplest version finds the correlation coefficient between the observed and predicted values (usually denoted by R) and squares it.
+
+> R2 is a measure of correlation, not accuracy.
+
+A common phenomenon with some tree-based methods is overprediction of low values and underprediction of high values. I such cases R2 needs to be used with caution, but such a systematic bias in the predictions may be acceptable if the model otherwise works.
+
+> It is also important to realize that R2 is dependent on the variation in the outcome. Using the interpretation that this statistic measures the proportion of variance explained by the model, one must remember that the denominator of that proportion is calculated using the sample variance of the outcome.
+
+See below
+
+**R2**
+
+$$
+R^2 = 1 - \frac{MSE}{Var(y)}
+$$
+
