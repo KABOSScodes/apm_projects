@@ -196,3 +196,7 @@ There is also LOOCV which fits as many models as there are samples in the traini
 > 1. Start with several models that are the least interpretable and most flexible, such as boosted trees or support vector machines. Across many problem domains, these models have a high likelihood of producing the empirically optimum results (i.e., most accurate).
 > 2. Investigate simpler models that are less opaque (e.g., not complete black boxes), such as multivariate adaptive regression splines (MARS), partial least squares, generalized additive models, or na ̈ıve Bayes models.
 > 3. Consider using the simplest model that reasonably approximates the per- formance of the more complex methods.
+
+## Chapter 5: Measuring Performance in Regression Models
+### 4.1 Data Splitting
+To understand the strengths and weaknesses of a particular model, relying solely on a sin- gle metric is problematic. Visualizations of the model fit, particularly residual plots, are critical to understanding whether the model is fit for purpose.
