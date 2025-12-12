@@ -288,3 +288,18 @@ $$
 - $Model Variance$: Vulnerability towards small pertubations in the data. 
 
 Highly correlated predictors can lead to collinearity issues. Bias of a model can be increased to reduce variance as a way to mitigate this issue. This is the variance-bias trade-off.
+
+## Chapter 6: Linear Regression and Its Cousins
+
+$$
+y_i = b_0 + b_{1}x_{i1} + b_{2}x_{i2} + ... + b_{P}x_{iP} + e_i
+$$
+### 
+
+
+#### XXX
+
+- What is it? Brief theoretical foundation explanation
+- What is it used for?
+- Pros and cons
+- Need to know regarding how to use it
