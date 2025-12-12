@@ -198,51 +198,50 @@ There is also LOOCV which fits as many models as there are samples in the traini
 > 3. Consider using the simplest model that reasonably approximates the per- formance of the more complex methods.
 
 ## Chapter 5: Measuring Performance in Regression Models
-### 4.1 Data Splitting
-**This will purely contain direct quotes from the book until the information is better organized**
 
->To understand the strengths and weaknesses of a particular model, relying solely on a single metric is problematic. Visualizations of the model fit, particularly residual plots, are critical to understanding whether the model is fit for purpose.
+When assessing the strengths and weaknesses of a model, a mix of performance metrics and plots (particularly residual plots) can/should be used to evaluate if the model truly is a good fit for its intended purpose.
 
-> When the outcome is a number, the most common method for characteriz- ing a model’s predictive capabilities is to use the root mean squared error (RMSE). This metric is a function of the model residuals, which are the ob- served values minus the model predictions.
+### Metrics
 
-> The mean squared error (MSE) is calculated by squaring the residuals and summing them. The RMSE is then calculated by taking the square root of the MSE so that it is in the same units as the original data.
+#### Mean squared error - MSE
 
-**MSE**
+The mean squared error is calculated as the sum of the squared residuals (observed values minus predicted values): 
 
 $$
 \text{MSE} = \frac{1}{n} \sum_{i=1}^n (y_i - \hat{y}_i)^2
 $$
 
-**RMSE**
+#### Root mean squared error - RMSE
+
+When the outcome is a number, the most common metric for evaluation of the model's predictive capabilities is the root mean squared error (RMSE), which is a function of the residuals. 
 
 $$
 \text{RMSE} = \sqrt{MSE} = \sqrt{\frac{1}{n} \sum_{i=1}^n (y_i - \hat{y}_i)^2}
 $$
 
-> Another common metric is the coefficient of determination, commonly written as R2. This value can be interpreted as the proportion of the information in the data that is explained by the model.
+#### Coefficient of determination - R2
 
-> There are multiple formulas for calculating this quantity (Kv ̊alseth 1985), although the simplest version finds the correlation coefficient between the observed and predicted values (usually denoted by R) and squares it.
+The coefficient of determination is another metric that is widely used (and often misused). It can be interpreted as:
 
-> R2 is a measure of correlation, not accuracy.
+> "the proportion of the information in the data that is explained by the model"
 
-A common phenomenon with some tree-based methods is overprediction of low values and underprediction of high values. I such cases R2 needs to be used with caution, but such a systematic bias in the predictions may be acceptable if the model otherwise works.
+It is important to note, that R2 is a measure of the correlation - not accuracy. A common phenomenon with some tree-based methods is overprediction of low values and underprediction of high values. In such cases R2 needs to be used with caution, but such a systematic bias in the predictions may be acceptable if the model otherwise works.
 
-> It is also important to realize that R2 is dependent on the variation in the outcome. Using the interpretation that this statistic measures the proportion of variance explained by the model, one must remember that the denominator of that proportion is calculated using the sample variance of the outcome.
+Likewise, it should be noted that R2 is dependent on the outcome variation as seen below. Thus, two models can have the exact same RMSE, but differences in the variance of the outcome values may result in one model performing better than the other according to R2.
 
-See below
-
-**R2**
+There are many formulas for calculating R2. It can be expressed in terms of MSE and the variance: 
 
 $$
 R^2 = 1 - \frac{MSE}{Var(y)}
 $$
 
-
-With r being the correlation coefficient:
+The simplest version simply squares the correlation coefficient:
 
 $$
 R^2 = r^2
 $$
+
+The correlation coefficient can be calculated from Pearson's formula.
 
 **Pearson's correlation coefficient - Conceptual Formula**
 * Numerator = covariance
@@ -260,3 +259,24 @@ $$
 r = \frac{n \sum x y - (\sum x)(\sum y)}
 {\sqrt{\left[ n \sum x^2 - (\sum x)^2 \right] \left[ n \sum y^2 - (\sum y)^2 \right]}}\]
 $$
+
+#### Spearman's rank correlation
+
+In some cases, such as with biological activity of drugs, it may be sufficient, or even better, for a model to simply rank new samples. Spearman's rank correlation can be used in for this purpose.
+
+> The rank correlation takes the ranks of the observed outcome values (as opposed to their actual numbers) and evaluates how close these are to ranks of the model predictions. To calculate this value, the ranks of the observed and predicted outcomes are obtained and the correlation coefficient between these ranks is calculated.
+
+### Variance-Bias Trade-off
+
+Under the assumption that data points are statistically independent with a theoretical mean of zero and a constant variance of $\sigma^2$, the following applies:
+
+$$
+E[MSE] = \sigma^2 + (Model Bias)^2 + Model Variance
+$$
+
+- E: The expected value
+- $\sigma^2$: Irreducible noise. Cannot be eliminated through modeling
+- $(Model Bias)^2$: How close the model can get to the true relationship between predictors and outcome.
+- $Model Variance$: Vulnerability towards small pertubations in the data. 
+
+Highly correlated predictors can lead to collinearity issues. Bias of a model can be increased to reduce variance as a way to mitigate this issue. This is the variance-bias trade-off.
