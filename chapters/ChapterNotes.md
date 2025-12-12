@@ -211,6 +211,8 @@ $$
 \text{MSE} = \frac{1}{n} \sum_{i=1}^n (y_i - \hat{y}_i)^2
 $$
 
+---
+
 #### Root mean squared error - RMSE
 
 When the outcome is a number, the most common metric for evaluation of the model's predictive capabilities is the root mean squared error (RMSE), which is a function of the residuals. 
@@ -218,6 +220,8 @@ When the outcome is a number, the most common metric for evaluation of the model
 $$
 \text{RMSE} = \sqrt{MSE} = \sqrt{\frac{1}{n} \sum_{i=1}^n (y_i - \hat{y}_i)^2}
 $$
+
+---
 
 #### Coefficient of determination - R2
 
@@ -260,11 +264,15 @@ r = \frac{n \sum x y - (\sum x)(\sum y)}
 {\sqrt{\left[ n \sum x^2 - (\sum x)^2 \right] \left[ n \sum y^2 - (\sum y)^2 \right]}}\]
 $$
 
+---
+
 #### Spearman's rank correlation
 
 In some cases, such as with biological activity of drugs, it may be sufficient, or even better, for a model to simply rank new samples. Spearman's rank correlation can be used in for this purpose.
 
 > "The rank correlation takes the ranks of the observed outcome values (as opposed to their actual numbers) and evaluates how close these are to ranks of the model predictions. To calculate this value, the ranks of the observed and predicted outcomes are obtained and the correlation coefficient between these ranks is calculated."
+
+---
 
 ### Variance-Bias Trade-off
 
