@@ -9,7 +9,7 @@ This file will be gradually developed in parallel with the assignments from Chap
 Data splitting defines how to create independent subsets for model development and evaluation.  
 Choice of splitting method depends on the characteristics of the dataset (e.g., classification vs regression and/or independence of samples).
 
-> With all splitting, it is crucial to set the seed number to ensure reproducibility.
+> "With all splitting, it is crucial to set the seed number to ensure reproducibility."
 
 ---
 
@@ -264,7 +264,7 @@ $$
 
 In some cases, such as with biological activity of drugs, it may be sufficient, or even better, for a model to simply rank new samples. Spearman's rank correlation can be used in for this purpose.
 
-> The rank correlation takes the ranks of the observed outcome values (as opposed to their actual numbers) and evaluates how close these are to ranks of the model predictions. To calculate this value, the ranks of the observed and predicted outcomes are obtained and the correlation coefficient between these ranks is calculated.
+> "The rank correlation takes the ranks of the observed outcome values (as opposed to their actual numbers) and evaluates how close these are to ranks of the model predictions. To calculate this value, the ranks of the observed and predicted outcomes are obtained and the correlation coefficient between these ranks is calculated."
 
 ### Variance-Bias Trade-off
 
