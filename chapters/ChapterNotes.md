@@ -266,8 +266,6 @@ r = \frac{n \sum x y - (\sum x)(\sum y)}
 {\sqrt{\left[ n \sum x^2 - (\sum x)^2 \right] \left[ n \sum y^2 - (\sum y)^2 \right]}}\]
 $$
 
----
-
 **Spearman's rank correlation**
 
 In some cases, such as with biological activity of drugs, it may be sufficient, or even better, for a model to simply rank new samples. Spearman's rank correlation can be used in for this purpose.
