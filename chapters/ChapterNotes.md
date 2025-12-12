@@ -268,7 +268,7 @@ $$
 
 ---
 
-#### Spearman's rank correlation
+**Spearman's rank correlation**
 
 In some cases, such as with biological activity of drugs, it may be sufficient, or even better, for a model to simply rank new samples. Spearman's rank correlation can be used in for this purpose.
 
