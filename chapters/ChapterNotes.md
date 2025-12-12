@@ -203,6 +203,8 @@ When assessing the strengths and weaknesses of a model, a mix of performance met
 
 ### Metrics
 
+---
+
 #### Mean squared error - MSE
 
 The mean squared error is calculated as the sum of the squared residuals (observed values minus predicted values): 
