@@ -291,9 +291,28 @@ Highly correlated predictors can lead to collinearity issues. Bias of a model ca
 
 ## Chapter 6: Linear Regression and Its Cousins
 
+Linear regression and its cousins concerns models all of which can directly or indirectly be written in the form
+
 $$
 y_i = b_0 + b_{1}x_{i1} + b_{2}x_{i2} + ... + b_{P}x_{iP} + e_i
 $$
+
+where
+
+- $y_i$: Numeric response for the ith sample
+- $b_j$: Estimated coefficient for the jth predictor
+- $x_{ij}$: Value of the jth predictor for the ith sample
+- $e_i$: Random error that cannot be explained by the model
+
+A model in the above form is said to be linear in its parameters. Models linear in their parameters include:
+
+- Ordinary linear regression
+- Partial Least Squares (PLS)
+- Penalized models:
+   - Ridge regression
+   - The lasso
+   - The elastic net
+
 ### 
 
 
