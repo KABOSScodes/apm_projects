@@ -289,6 +289,8 @@ $$
 
 Highly correlated predictors can lead to collinearity issues. Bias of a model can be increased to reduce variance as a way to mitigate this issue. This is the variance-bias trade-off.
 
+---
+
 ## Chapter 6: Linear Regression and Its Cousins
 
 Linear regression and its cousins concerns models all of which can directly or indirectly be written in the form
@@ -318,20 +320,90 @@ A model in the above form is said to be linear in its parameters. Models linear 
 
 These models attempt to find the set of parameters the minimizes the sum of the squared errors or a function thereof. 
 
+---
+
 ### Case Study: Quantitative Structure-Activity Relationship modeling
 
 > "We will demonstrate various regression modeling techniques by predicting solubility using chemical structures."
 
 > "Tetko et al. (2001) and Huuskonen (2000) investigated a set of compounds with corresponding experimental solubility values using complex sets of descriptors. They used linear regression and neural network models to estimate the relationship between chemical structure and solubility. For our analyses, we will use 1,267 compounds and a set of more understandable descriptors that fall into one of three groups:
-> * Twohundredandeightbinary“fingerprints”thatindicatethepresenceor absence of a particular chemical substructure.
+> * Twohundredandeight binary “fingerprints” that indicate the presence or absence of a particular chemical substructure.
 > * Sixteen count descriptors, such as the number of bonds or the number of bromine atoms.
 > * Four continuous descriptors, such as molecular weight or surface area."
 
 > "On average, the descriptors are uncorrelated. However, there are many pairs that show strong positive correlations; 47 pairs have correlations greater than 0.90. In some cases, we should expect correlations between descriptors. In the solubility data, for example, the surface area of a compound is calculated for regions associated with certain atoms (e.g., nitrogen or oxygen). One descriptor in these data measures the surface area associated with two specific elements while another uses the same elements plus two more. Given their definitions, we would expect that the two surface area predictors would be correlated. In fact, the descriptors are identical for 87 % of the compounds. The small differences between surface area predictors may contain some important information for prediction, but the modeler should realize that there are implications of redundancy on the model. Another relevant quality of the solubility predictors is that the count-based descriptors show a significant right skewness, which may have an impact on some models."
 
+**Data splitting**
+
 > "The data were split using random sampling into a training set (n = 951) and test set (n = 316). The training set will be used to tune and estimate models, as well as to determine initial estimates of performance using repeated 10-fold cross-validation. The test set will be used for a final characterization of the models of interest."
 
-#### XXX
+**Pre-processing**
+
+Fingerprint descriptors:
+
+> "Recall that 208 of the predictors are binary fingerprints. Since there are only two values of these variables, there is very little that pre-processing will accomplish."
+
+Skewness of continuous descriptors:
+
+> "The average skewness statistic was 1.6 (with a minimum of 0.7 and a maximum of 3.8), indicating that these predictors have a propensity to be right skewed. To correct for this skewness, a Box–Cox transformation was applied to all predictors (i.e., the transformation parameter was not estimated to be near one for any of the continuous predictors)."
+
+**Linearity**
+
+> "Figure 6.3 shows scatter plots of the predictors against the outcome along with a regression line from a flexible “smoother” model called loess (Cleveland 1979). The smoothed regression lines indicate that there are some linear relationships between the predictors and the outcome (e.g., molecular weight) and some nonlinear relationships (e.g., the number of origins or chlorines). Because of this, we might consider augmenting the predictor set with quadratic terms for some variables."
+
+**Between-predictor correlations**
+
+> "principal component analysis (PCA) was used on the full set of trans- formed predictors, and the percent of variance accounted for by each component is determined. Figure 6.4 is commonly known as a scree plot and displays a profile of the variability accounted for by each component. Notice that the amount of variability summarized by component drops sharply, with no one component accounting for more than 13 % of the variance. This profile indicates that the structure of the data is contained in a much smaller number of dimensions than the number of dimensions of the original space; this is often due to a large number of collinearities among the predictors."
+
+> "Figure 6.5 shows the correlation structure of the transformed continuous predictors; there are many strong positive correlations (indicated by the large, dark blue circles). As previously discussed, this could create problems in developing some models (such as linear regression), and appropriate pre-processing steps will need to be taken to account for this problem."
+
+---
+
+#### Linear Regression
+
+Ordinary linear regression attempts to find the plane that minimizes the sum of squared errors (SSE):
+
+$$
+SSE = \sum_{i=1}^n (y_i - \hat{y}_i)^2
+$$
+
+where
+
+- $y_i$: Outcome for the ith sample
+- $\hat{y}_i$: Predicted outcome for the ith sample
+
+The mathematically optimal plane can be shown to be:
+
+$$
+(\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top y
+$$
+
+- $\mathbf{X}$: Matrix of predictors
+- y: Response vector
+
+Making minimal assumptions about the distribution of the residuals, the parameter estimates that minimize SSE are the ones that minimize the bias of the bias-variance trade-off.
+
+$(\mathbf{X}^\top \mathbf{X})^{-1}$ is proportional to the covariance matrix of the predictors. A unique invers ONLY exists when:
+
+1. No predictor can be determined from a combination of one or more of the other predictors
+2. The number of samples is greater than the number of predictors
+
+If the data falls under condition 1, a unique set of predicted values can still be obtained by
+
+- replacing $(\mathbf{X}^\top \mathbf{X})^{-1}$ with a conditional inverse (Graybill 1976)
+- removing predictors that are collinear
+
+But, since the regression coefficients are not unique, it is not possible to meaningfully interpret them.
+
+If the data falls under condition 2, there are still several options:
+
+- Remove pairwise correlated predictors, which will reduce the number of overall predictors
+- Diagnose multicollinearity (predictors may be functions of two or more of the other predictors) using the variance inflation factor (Myers 1994)
+- PCA 
+- PLS
+- Employ methods that shrink parameter estimates such as ridge regression, the lasso, or the elastic net
+
+A drawback of multiple linear regression is that the solution is a flat hyperplane. The Predicted-vs-residual plot of Fig. 5.3 is a great way of visually investigating if the relationships are non-linear. Curvature in the plot strongly indicates that the underlying relationship is not linear. 
 
 - What is it? Brief theoretical foundation explanation
 - What is it used for?
