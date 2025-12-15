@@ -304,6 +304,9 @@ where
 - $x_{ij}$: Value of the jth predictor for the ith sample
 - $e_i$: Random error that cannot be explained by the model
 
+This makes them highly interpretable, but they are mainly useful when the relationship between the predictors and the response falls along a hyperplane. Linear regression models can be augmented in case the relation between predictors is curvilinear (quadratic, cubic, interactions between predictors), 
+If the relation between predictors and response is curvelinear (quadratic, cubic, interactions between predictors), one can attempt to augment the linear models by adding predictors that are functions of original predictors, but such augmentations may not always be enough to capture non-linear relationships.
+
 A model in the above form is said to be linear in its parameters. Models linear in their parameters include:
 
 - Ordinary linear regression
@@ -313,8 +316,17 @@ A model in the above form is said to be linear in its parameters. Models linear 
    - The lasso
    - The elastic net
 
-### 
+These models attempt to find the set of parameters the minimizes the sum of the squared errors or a function thereof. 
 
+### Case Study: Quantitative Structure-Activity Relationship modeling
+
+> "We will demonstrate various regression modeling techniques by predicting solubility using chemical structures."
+
+> "Tetko et al. (2001) and Huuskonen (2000) investigated a set of compounds with corresponding experimental solubility values using complex sets of descriptors. They used linear regression and neural network models to estimate the relationship between chemical structure and solubility. For our analyses, we will use 1,267 compounds and a set of more understandable descriptors that fall into one of three groups:
+> * Twohundredandeightbinary“fingerprints”thatindicatethepresenceor absence of a particular chemical substructure.
+> * Sixteen count descriptors, such as the number of bonds or the number of bromine atoms.
+> * Four continuous descriptors, such as molecular weight or surface area."
+> On average, the descriptors are uncorrelated. However, there are many pairs that show strong positive correlations; 47 pairs have correlations greater than 0.90. In some cases, we should expect correlations between descriptors. In the solubility data, for example, the surface area of a compound is calculated for regions associated with certain atoms (e.g., nitrogen or oxygen). One descriptor in these data measures the surface area associated with two specific elements while another uses the same elements plus two more. Given their definitions, we would expect that the two surface area predictors would be correlated. In fact, the descriptors are identical for 87 % of the compounds. The small differences between surface area predictors may contain some important information for prediction, but the modeler should realize that there are implications of redundancy on the model. Another relevant quality of the solubility predictors is that the count-based descriptors show a significant right skewness, which may have an impact on some models.
 
 #### XXX
 
