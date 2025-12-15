@@ -361,7 +361,7 @@ Skewness of continuous descriptors:
 
 #### Linear Regression
 
-**Model definition**
+\underline{Model definition}
 
 Ordinary linear regression attempts to find the plane that minimizes the sum of squared errors (SSE):
 
@@ -387,7 +387,7 @@ Making minimal assumptions about the distribution of the residuals, the paramete
 
 ---
 
-**Model need-to-know**
+\underline{Model need-to-know}
 
 $(\mathbf{X}^\top \mathbf{X})^{-1}$ is proportional to the covariance matrix of the predictors. A unique invers ONLY exists when:
 
@@ -433,6 +433,40 @@ When collinearity exists in the data set, the regression model may become instab
 ---
 
 #### Partial Least Squares
+
+As previously stated, there are two common pitfalls with linear regression:
+
+1. Correlation between predictors results in the ordinary least squares solution for multiple linear regression becoming unstable due to high variability
+2. Number of predictors greater than number of observations means that ordinary least squared will be unable to find a unique solution in its usual form that minimizes SSE.
+
+Using PCA for pre-processing ensures resulting predictors or combinations thereof are uncorrelated. The downside is that resulting predictors are linear combinations of the originals, meaning the interpretability becomes less obvious. 
+
+Performing regression on components from PCA is known as principal component regression, **PCR**. While this is a solid approach to regression, it is not without potential pitfalls, as the components don't necessarily explain the response.
+
+> "Because of this inherent problem with PCR, we recommend using PLS when there are correlated predictors and a linear regression-type solution is desired."
+
+---
+
+\underline{Model definition}
+
+While PCA components are made to maximally summarize the predictor space variability, PLS components are made to maximally summarize covariance with the response.
+
+> PLS finds linear combinations of the predictors. These linear combinations are commonly called components or latent variables. While the PCA linear combinations are chosen to maximally summarize predictor space variability, the PLS linear combinations of predictors are chosen to maximally summarize covariance with the response.
+
+In practice, PCR performs similar to PLS, but based on the experiences of the authors:
+
+> "the number of components retained via cross-validation using PCR is always equal to or greater than the number of components retained by PLS. This is due to the fact that dimensions retained by PLS have been chosen to be optimally related to the response, while those chosen with PCR are not."
+
+Through Variable Importance in the Projection calculations, the importance of predictors wrt predicting the response can be determined. This calculation was developed by Wold et al. (1993). They go further and suggest that "predictors with small PLS regression coefficients and small VIP values are likely not important and should be considered as candidates for removal from the model."
+
+---
+
+\underline{Model need-to-know}
+
+Prior to performing PLS, the predictors should be centered and scaled, especially if the predictors are on scales of differing magnitude. In spite of the constraint of correlation with the response, predictors with large variation may skew the regression.
+
+---
+
 
 
 
