@@ -447,7 +447,7 @@ Performing regression on components from PCA is known as principal component reg
 
 ---
 
-\uline{Model definition}
+$\uline{Model definition}$
 
 While PCA components are made to maximally summarize the predictor space variability, PLS components are made to maximally summarize covariance with the response.
 
@@ -461,7 +461,7 @@ Through Variable Importance in the Projection calculations, the importance of pr
 
 ---
 
-\uline{Model need-to-know}
+$\uline{Model need-to-know}$
 
 Prior to performing PLS, the predictors should be centered and scaled, especially if the predictors are on scales of differing magnitude. In spite of the constraint of correlation with the response, predictors with large variation may skew the regression.
 
@@ -469,7 +469,7 @@ PLS may be prone to inefficiency when n > 2500 and P > 30.
 
 ---
 
-\uline{Algorithmic Variations of PLS}
+$\uline{Algorithmic Variations of PLS}$
 
 Lindgren et al. (1993) developed an alternative computation approach to address the inefficiency in computing. They leveraged:
 
@@ -499,3 +499,7 @@ Due to the considerable amount of effort in constructing the new predictor sets,
 #### Penalized Models
 
 
+
+---
+
+$\uline{Model definition}$
