@@ -361,7 +361,7 @@ Skewness of continuous descriptors:
 
 #### Linear Regression
 
-\underline{Model definition}
+\uline{Model definition}
 
 Ordinary linear regression attempts to find the plane that minimizes the sum of squared errors (SSE):
 
@@ -387,7 +387,7 @@ Making minimal assumptions about the distribution of the residuals, the paramete
 
 ---
 
-\underline{Model need-to-know}
+\uline{Model need-to-know}
 
 $(\mathbf{X}^\top \mathbf{X})^{-1}$ is proportional to the covariance matrix of the predictors. A unique invers ONLY exists when:
 
@@ -447,7 +447,7 @@ Performing regression on components from PCA is known as principal component reg
 
 ---
 
-\underline{Model definition}
+\uline{Model definition}
 
 While PCA components are made to maximally summarize the predictor space variability, PLS components are made to maximally summarize covariance with the response.
 
@@ -461,16 +461,38 @@ Through Variable Importance in the Projection calculations, the importance of pr
 
 ---
 
-\underline{Model need-to-know}
+\uline{Model need-to-know}
 
 Prior to performing PLS, the predictors should be centered and scaled, especially if the predictors are on scales of differing magnitude. In spite of the constraint of correlation with the response, predictors with large variation may skew the regression.
 
+PLS may be prone to inefficiency when n > 2500 and P > 30.
+
 ---
 
+\uline{Algorithmic Variations of PLS}
 
+Lindgren et al. (1993) developed an alternative computation approach to address the inefficiency in computing. They leveraged:
 
+1. A "kernel" matrix, P × P
+2. The covariance matrix of the predictors, P × P
+3. The covariance matrix of the predictors and response, P × 1
 
-- What is it? Brief theoretical foundation explanation
-- What is it used for?
-- Pros and cons
-- Need to know regarding how to use it
+This was especially effective when n >> P.
+
+Likewise, de Jong (1993) improved the algorithm's inefficiency issues by viewing the underlying task as "finding latent orthogonal variables in the predictor space that maximize the covariance with the response". This meant focusing on deflating the covariance matrix between predictors and response rather than deflating the predictor matrix AND the response. This approach was termed SIMPLS, as it was a "simple modification of the PLS algorithm".
+
+When there is only one response variable, SIMPLS latent variables were shown to be identical to those of the NIPALS algorithm on which PLS is based.
+
+Dayal and MacGregor (1997) developed two modifications to the NIPALS algorithm, which especially performed when n >> P. As with SIMPLS, their modifications only require the deflated covariance matrix. Alin (2009) compared algorithmic modifications to NIPALS with varying number of samples (500–10,000), predictors (10–30), and responses (1–15). The second kernel algorithm of Dayal and MacGregor was more computationally efficient than all other approaches in nearly all scenarios and provided superior performance when n > 2, 500 and P > 30. When their second algorithm was not the most efficient, their first was. 
+
+Rännar et al. (1994) adressed the case where P > n by constructing a n x n dimensional matrix based on the predictor and response matrices. A usual PLS analysis can then be performed on the n x n matrix. 
+
+Modifications have been developed to capture curvilinear and non-linear relationships:
+
+- Berglund and Wold (1997): Added squared and cubic (if necessary) predictors
+- Berglund et al. (2001): Binned predictors according to the GIFI approach
+
+Due to the considerable amount of effort in constructing the new predictor sets, Kuhn & Johnson do not recommend relying PLS to capture intricate predictor-response structures.
+
+#### Penalized Models
+
