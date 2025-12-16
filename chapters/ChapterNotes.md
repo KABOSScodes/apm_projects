@@ -500,6 +500,10 @@ Due to the considerable amount of effort in constructing the new predictor sets,
 
 Under standard assumptions, the coefficients of ordinary least squares regression are unbiased and have low variance. However, increasing bias can sometimes create a significant drop in variance and in turn improve MSE. 
 
+---
+
+Model definition:
+
 As previously stated, ordinary least squares regression find parameters to minimize SSE, which was defined as:
 
 $$
@@ -516,12 +520,32 @@ This may help with issues with collinearity which may otherwise lead to inflatio
 
 Adding penalization means coefficients are only allowed to become large, if a proportional reduction in SSE occurs. Essentially, coefficients are "pushed" towards 0 as $\lambda$ becomes large. Such techniques are called "shrinkage methods".
 
+A popular alternative is the least absolute shrinkage and selection operator model, lasso:
+
 $$
 SSE_{L_1} = \sum_{i=1}^n (y_i - \hat{y}_i)^2 + \lambda \sum_{j=1}^P \|\beta _j\|
 $$
 
+While ridge regression shrinks coefficients towards 0 without them ever actually becoming 0, the lasso simoultaneously shrinks coefficients and performs feature selection by allowing them to become 0 (for some values of $\lambda$). 
 
+> “Ridge regression is known to shrink the coefficients of correlated predictors towards each other, allowing them to borrow strength from each other. In the extreme case of k identical predictors, they each get identical coefficients with 1/kth the size that any single one would get if fit alone.[. . . ]
+lasso, on the other hand, is somewhat indifferent to very correlated predictors, and will tend to pick one and ignore the rest.” - Friedman et al. (2010)
+
+Lasso has been incorporated with many other techniques, such as:
+
+- Linear discriminant analysis: Clemmensen et al. 2011; Witten and Tibshirani 2011
+- PLS: Chun and Keles 2010
+- PCA: Jolliffe et al. 2003; Zou et al. 2004
+
+The development of the LARS framework (least angle regression), by Efron et al. (2004) was a significant advancement. This framework encompasses lasso and similar models and allows to fit lasso more efficiently in especially high-dimensional problems such as genomics. A survey is provided by Friedman et al. (2010) and Hesterberg et al. (2008).
+
+The elastic net (Zou and Hastie 2005) generalizes the lasso:
+
+$$
+SSE_{Enet} = \sum_{i=1}^n (y_i - \hat{y}_i)^2 + \lambda _1 \sum_{j=1}^P \|\beta _j\| + \lambda _2 \sum_{j=1}^P \beta _j^2
+$$
+
+They suggest that this model more effectively handles groups of high correlated predictors.
 
 ---
 
-Model definition:
