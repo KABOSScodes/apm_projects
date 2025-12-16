@@ -361,7 +361,9 @@ Skewness of continuous descriptors:
 
 #### Linear Regression
 
-\uline{Model definition}
+---
+
+Model definition:
 
 Ordinary linear regression attempts to find the plane that minimizes the sum of squared errors (SSE):
 
@@ -387,7 +389,7 @@ Making minimal assumptions about the distribution of the residuals, the paramete
 
 ---
 
-\uline{Model need-to-know}
+Model need-to-know:
 
 $(\mathbf{X}^\top \mathbf{X})^{-1}$ is proportional to the covariance matrix of the predictors. A unique invers ONLY exists when:
 
@@ -409,13 +411,9 @@ If the data falls under condition 2, there are still several options:
 - PLS
 - Employ methods that shrink parameter estimates such as ridge regression, the lasso, or the elastic net
 
----
-
 Another drawback of multiple linear regression is that the solution is a flat hyperplane. The Predicted-vs-residual plot of Fig. 5.3 is a great way of visually investigating if the relationships are non-linear. Curvature in the plot strongly indicates that the underlying relationship is not linear. Quadratic, cubic, or predictor interactions can be accomodated by adding quadratic, cubic, or interaction predictors (feature engineering), but this is not always a practical solution.
 
 If it is not possible to determine the non-linear predictor-response relationships, or the relationships are simply too non-linear, more complex methods may be required.
-
----
 
 Linear regression models are prone to chase outliers. 
 
@@ -425,8 +423,6 @@ Such observation are called influential. One way to address this issue is to exc
 
 - Sum of the absolute errors is more resistant to outliers
 - The Huber function uses the squared errors when they are below a certain threshold and the absolute errors when above it
-
----
 
 When collinearity exists in the data set, the regression model may become instable (see example p. 110-111). For pairwise collinearity, one of the offending predictors may be removed. However, if the number of predictors is large, this may be difficult, and if the collinearity involves multiple predictors, the interactions may be too complex, in which case a different model should be considered.
 
@@ -447,7 +443,7 @@ Performing regression on components from PCA is known as principal component reg
 
 ---
 
-$\uline{Model definition}$
+Model definition:
 
 While PCA components are made to maximally summarize the predictor space variability, PLS components are made to maximally summarize covariance with the response.
 
@@ -461,7 +457,7 @@ Through Variable Importance in the Projection calculations, the importance of pr
 
 ---
 
-$\uline{Model need-to-know}$
+Model need-to-know:
 
 Prior to performing PLS, the predictors should be centered and scaled, especially if the predictors are on scales of differing magnitude. In spite of the constraint of correlation with the response, predictors with large variation may skew the regression.
 
@@ -502,4 +498,4 @@ Due to the considerable amount of effort in constructing the new predictor sets,
 
 ---
 
-$\underline{Model definition}$
+Model definition:
