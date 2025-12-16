@@ -506,11 +506,21 @@ $$
 SSE = \sum_{i=1}^n (y_i - \hat{y}_i)^2
 $$
 
-Bias can be increased by adding a penalty term.
+Bias can be increased by adding a penalty term such as with Ridge regression (Hoerl 1970).
 
 $$
 SSE_{L_2} = \sum_{i=1}^n (y_i - \hat{y}_i)^2 + \lambda \sum_{j=1}^P \beta _j^2
 $$
+
+This may help with issues with collinearity which may otherwise lead to inflation in regression coefficients. $L_2$ signifies a second-order penalty (the square). Penalizing or controlling the regression coefficients is called regularization. 
+
+Adding penalization means coefficients are only allowed to become large, if a proportional reduction in SSE occurs. Essentially, coefficients are "pushed" towards 0 as $\lambda$ becomes large. Such techniques are called "shrinkage methods".
+
+$$
+SSE_{L_1} = \sum_{i=1}^n (y_i - \hat{y}_i)^2 + \lambda \sum_{j=1}^P \|\beta _j\|
+$$
+
+
 
 ---
 
