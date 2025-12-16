@@ -502,4 +502,6 @@ Due to the considerable amount of effort in constructing the new predictor sets,
 
 ---
 
-$$\uline{Model definition}$$
+$$
+\uline{Model definition}
+$$
