@@ -494,5 +494,8 @@ Modifications have been developed to capture curvilinear and non-linear relation
 
 Due to the considerable amount of effort in constructing the new predictor sets, Kuhn & Johnson do not recommend relying PLS to capture intricate predictor-response structures.
 
+---
+
 #### Penalized Models
+
 
