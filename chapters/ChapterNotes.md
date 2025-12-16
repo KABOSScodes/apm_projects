@@ -509,7 +509,7 @@ $$
 Bias can be increased by adding a penalty term.
 
 $$
-SSE_{L_2} = \sum_{i=1}^n (y_i - \hat{y}_i)^2 +
+SSE_{L_2} = \sum_{i=1}^n (y_i - \hat{y}_i)^2 + \lambda \sum_{j=1}^P \beta _j^2
 $$
 
 ---
