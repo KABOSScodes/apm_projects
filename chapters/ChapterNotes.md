@@ -207,11 +207,15 @@ When assessing the strengths and weaknesses of a model, a mix of performance met
 
 #### Mean squared error - MSE
 
-The mean squared error is calculated as the sum of the squared residuals (observed values minus predicted values): 
+The mean squared error is calculated as the mean of the sum of the squared residuals (observed values minus predicted values): 
 
 $$
 \text{MSE} = \frac{1}{n} \sum_{i=1}^n (y_i - \hat{y}_i)^2
 $$
+
+The sum of the squared residuals are also called, sum of the squared errors, SSE:
+
+SSE = \sum_{i=1}^n (y_i - \hat{y}_i)^2
 
 ---
 
@@ -465,7 +469,7 @@ PLS may be prone to inefficiency when n > 2500 and P > 30.
 
 ---
 
-$\uline{Algorithmic Variations of PLS}$
+Algorithmic Variations of PLS:
 
 Lindgren et al. (1993) developed an alternative computation approach to address the inefficiency in computing. They leveraged:
 
@@ -494,7 +498,19 @@ Due to the considerable amount of effort in constructing the new predictor sets,
 
 #### Penalized Models
 
+Under standard assumptions, the coefficients of ordinary least squares regression are unbiased and have low variance. However, increasing bias can sometimes create a significant drop in variance and in turn improve MSE. 
 
+As previously stated, ordinary least squares regression find parameters to minimize SSE, which was defined as:
+
+$$
+SSE = \sum_{i=1}^n (y_i - \hat{y}_i)^2
+$$
+
+Bias can be increased by adding a penalty term.
+
+$$
+SSE_{L_2} = \sum_{i=1}^n (y_i - \hat{y}_i)^2 +
+$$
 
 ---
 
