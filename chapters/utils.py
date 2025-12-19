@@ -181,7 +181,7 @@ def find_correlation(df, cutoff=0.75, exact=True):
         pass
 
     corr_matrix = df.corr().abs()
-    cols_to_delete = _find_correlation_fast(corr_matrix, cutoff)
+    cols_to_delete = _find_correlation_fast(corr_matrix, cutoff) # Until exact is implemented
 
     return cols_to_delete
 
