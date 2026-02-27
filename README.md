@@ -1,3 +1,5 @@
+![Status](https://img.shields.io/badge/status-temporarily_paused-orange)
+
 # Applied Predictive Modeling Projects
 
 ## Project Description
@@ -24,7 +26,7 @@ The goal of this project is to deepen my understanding of predictive modeling te
 
 ## Project Status
 
-This repository is a work in progress. Notebooks and content will be added and refined continuously as I work through the chapters in *Applied Predictive Modeling*.
+This repository is temporarily on hold, while focusing on a Process Engineering Toolkit (PET). This project will be continued.
 
 ## Getting Started
 
